@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2d2898401ec342499cc7c0c9ef95607, type: 3}
+  m_Name: Heather
+  m_EditorClassIdentifier: 
+  charName: Heather
+  favoriteDrink: {fileID: 0}
+  expressions:
+  - type: 0
+    sprite: {fileID: 3589117536062990964, guid: 4fb856929bf73b842ab9795446c416b9, type: 3}
+  - type: 1
+    sprite: {fileID: -3213338478731498277, guid: f712a66f03d31934698c6e7611631acf, type: 3}
+  - type: 2
+    sprite: {fileID: -1317026252678793333, guid: 1983392f195325940a0f123ca23564ca, type: 3}
+  greetings:
+  - type: 0
+    text: Hi this is Heather
+  orders:
+  - type: 0
+    text: Uhh.. One terribly long coffee drink name please to check if the skip dialogue
+      is working hah ha
+  feedbacks: []
+  story: []
