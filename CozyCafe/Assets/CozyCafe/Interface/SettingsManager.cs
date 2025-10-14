@@ -52,7 +52,6 @@ public class SettingsManager : MonoBehaviour
         }
 
         Instance = this;
-        DontDestroyOnLoad(this);
 
         availableResolutions = Screen.resolutions;
         LoadSettings();
@@ -140,7 +139,7 @@ public class SettingsManager : MonoBehaviour
         }
 
         settings.fullScreenMode = preSaveMode;
-        Debug.Log($"Set Screen Setting to {preSaveMode}");
+        //Debug.Log($"Set Screen Setting to {preSaveMode}");
 
         Screen.SetResolution(settings.resolutionX, settings.resolutionY, settings.fullScreenMode, settings.RefreshRate);
     }
@@ -150,10 +149,10 @@ public class SettingsManager : MonoBehaviour
 
     private void ApplyAudioSettings()
     {
-        SetVolume("MasterVolume", settings.masterVolume);
-        SetVolume("MusicVolume", settings.musicVolume);
-        SetVolume("SfxVolume", settings.sfxVolume);
-        SetVolume("Babble", settings.babble ? settings.sfxVolume : 0);
+        //SetVolume("MasterVolume", settings.masterVolume);
+        //SetVolume("MusicVolume", settings.musicVolume);
+        //SetVolume("SfxVolume", settings.sfxVolume);
+        //SetVolume("Babble", settings.babble ? settings.sfxVolume : 0);
     }
 
     private void SetVolume(string parameter, float value)

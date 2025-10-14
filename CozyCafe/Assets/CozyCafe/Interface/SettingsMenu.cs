@@ -26,12 +26,12 @@ public class SettingsMenu : MonoBehaviour
 
         //fill resolution options
 
-        List<string> resolutionList = new List<string>();
-        foreach (Resolution resolution in SettingsManager.Instance.AvailableResolutions)
-        {
-            resolutionList.Add($"{resolution.width}x{resolution.height}");
-        }
-        resolutions.SetOptions(resolutionList);
+        //List<string> resolutionList = new List<string>();
+        //foreach (Resolution resolution in SettingsManager.Instance.AvailableResolutions)
+        //{
+        //    resolutionList.Add($"{resolution.width}x{resolution.height}");
+        //}
+        //resolutions.SetOptions(resolutionList);
 
     }
 

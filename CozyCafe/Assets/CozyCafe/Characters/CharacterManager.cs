@@ -14,6 +14,7 @@ public class CharacterManager : MonoBehaviour
     [SerializeField] private AudioClip doorSound;
 
     [Header("Character Settings")]
+    [SerializeField] private static int CHARACTERSPERDAY = 3;
     [SerializeField] private List<CharacterData> characters;
     [SerializeField] private GameObject characterPrefab;
     [SerializeField] private GameObject characterParent;
@@ -28,14 +29,17 @@ public class CharacterManager : MonoBehaviour
 
     private List<CharacterData> returningCharacters = new List<CharacterData>();
 
-    private GameObject currentObject;
-    private Character currentCharacter;
-    private bool isConversationActive;
+    private GameObject activeCharacterObj;
+    private Character activeCharacter;
     private AudioSource characterAudioSource;
+    private bool isConversationActive;
+    private bool hasOrdered;
+    private int characterCount;
 
     public float TimeBeforeAppear => timeBeforeAppear;
     public float AppearAnimationDuration => appearAnimationDuration;
     public bool IsConversationActive => isConversationActive;
+    public bool HasOrdered => hasOrdered;
 
     private void Awake()
     {
@@ -46,20 +50,15 @@ public class CharacterManager : MonoBehaviour
         }
 
         Instance = this;
-        DontDestroyOnLoad(this);
-    }
 
-    void Start()
-    {
+        characterCount = 0;
         characterAudioSource = gameObject.GetComponent<AudioSource>();
-        dialogueField.gameObject.SetActive(false);
-        interactButton.gameObject.SetActive(false);
+        ToggleButton(false);
+        ToggleDialogueWindow(false);
         isConversationActive = false;
 
         returningCharacters.Clear();
         ResetDay();
-
-        NewCharacter();
     }
 
     void OnEnable()
@@ -80,23 +79,32 @@ public class CharacterManager : MonoBehaviour
     {
         availableCharacters = characters;
         visitedCharacters.Clear();
-        currentCharacter = null;
+        activeCharacter = null;
     }
 
     public void NewCharacter()
     {
+        if(availableCharacters.Count == visitedCharacters.Count)
+        {
+            Debug.Log("All characters visited");
+        }
+
+        if (activeCharacter != null)
+        {
+            Destroy(activeCharacterObj);
+        }
         // Door Sound
         if (characters != null)
         {
             //initiate prefab
-            currentObject = Instantiate(characterPrefab);
-            currentObject.transform.SetParent(characterParent.transform, false);
+            activeCharacterObj = Instantiate(characterPrefab);
+            activeCharacterObj.transform.SetParent(characterParent.transform, false);
 
-            currentCharacter = currentObject.GetComponent<Character>();
+            activeCharacter = activeCharacterObj.GetComponent<Character>();
 
             int index = Random.Range(0, availableCharacters.Count);
 
-            currentCharacter.InitCharacter(availableCharacters[index]);
+            activeCharacter.InitCharacter(availableCharacters[index]);
 
 
             visitedCharacters.Add(availableCharacters[index]);
@@ -105,28 +113,97 @@ public class CharacterManager : MonoBehaviour
             availableCharacters.RemoveAt(index);
 
             // if character is here for the first time, reset story
-            if (!returningCharacters.FirstOrDefault(data => currentCharacter.Data == data))
+            if (!returningCharacters.FirstOrDefault(data => activeCharacter.Data == data))
             {
-                currentCharacter.Data.StoryProgress = 0;
+                activeCharacter.Data.StoryProgress = 0;
+                activeCharacter.Data.IsReturning = false;
             }
-            currentObject.name = currentCharacter.Data.Name;
+            activeCharacterObj.name = activeCharacter.Data.Name;
+
+            characterCount++;
+        }
+        hasOrdered = false;
+    }
+
+    public void DeleteCharacter()
+    {
+        //add fade out animation here
+        bool isLast = characterCount == CHARACTERSPERDAY;
+
+        activeCharacter.DestroyCharacter(isLast);
+
+        if (isLast)
+        {
+            //Save progress
+            GameManager.Instance.FinishDay();
         }
     }
 
-    public void ToggleConversationUI(bool isactive)
+    public void EndConversation()
     {
-        Debug.Log("conversation active: " + IsConversationActive);
-        isConversationActive = isactive;
+        isConversationActive = false;
 
-        dialogueField.gameObject.SetActive(isConversationActive);
-        interactButton.gameObject.SetActive(!isConversationActive);
+        if (hasOrdered)
+        {
+            ToggleButton(false);
+            ToggleDialogueWindow(false);
+        }
+        if (activeCharacter.DrinkReceived)
+        {
+            ToggleButton(false);
+            ToggleDialogueWindow(false);
+            DeleteCharacter();
+        }
+    }
 
+    public void ToggleButton(bool b)
+    {
+        interactButton.gameObject.SetActive(b);
+    }
+
+    public void ToggleDialogueWindow(bool b)
+    {
+        dialogueField.gameObject.SetActive(b);
     }
 
     public void StartConversation()
     {
-        ToggleConversationUI(true);
-        dialogueField.SetDialogue(currentCharacter.GetConversation());
+        bool drinkExists = Beverage.ActiveDrink != null;
+        isConversationActive = true;
+
+        if (!hasOrdered)
+        {
+            //Greeting and Order
+            //Debug.Log("greet");
+
+            ToggleDialogueWindow(true);
+            ToggleButton(false);
+            dialogueField.SetDialogue(activeCharacter.GetConversation(hasOrdered), true);
+            hasOrdered = true;
+        }
+
+        else
+        {
+            if (drinkExists)
+            {
+                bool drinkIsReady = Beverage.ActiveDrink.BeverageData.IsFull;
+                if (drinkIsReady)
+                {
+                    //Destroy Cup
+                    Destroy(Beverage.ActiveDrink.gameObject);
+                    //Feedback and Goodbye
+                    //Debug.Log("feedback");
+
+                    ToggleDialogueWindow(true);
+                    ToggleButton(false);
+                    dialogueField.SetDialogue(activeCharacter.GetConversation(hasOrdered), true);
+
+                    hasOrdered = false;
+                }
+                else { Debug.Log("Drink not ready"); }
+            }
+            else { Debug.Log("Drink not made"); }
+        }
     }
 
     public void PlaySound()
@@ -139,7 +216,7 @@ public class CharacterManager : MonoBehaviour
 
     private void SetTalking(bool b)
     {
-        currentCharacter.ChangeExpression(b ? ExpressionType.Talking : ExpressionType.Neutral);
+        activeCharacter.ChangeExpression(b ? ExpressionType.Talking : ExpressionType.Neutral);
     }
 
 }

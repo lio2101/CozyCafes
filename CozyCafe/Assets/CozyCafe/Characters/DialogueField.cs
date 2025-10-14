@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,12 +10,16 @@ using UnityEngine.UI;
 
 public class DialogueField : MonoBehaviour
 {
+    [TextArea(5, 10)][SerializeField] private string presetText;
+    [SerializeField] private bool startOnEnable;
     [SerializeField] private AudioClip babbleAudio;
     [SerializeField] private Button continueButton;
+    [SerializeField] private Button overButton;
+
 
     [Header("Settings")]
     [SerializeField] private float letterSpeed = 1.0f;
-    [SerializeField] private float soundSpeed = 1.0f;
+    //[SerializeField] private float soundSpeed = 1.0f;
     [SerializeField] private Vector2 pitchRange = new Vector2(0.8f, 1.2f);
 
     private AudioSource audioSource;
@@ -24,6 +29,7 @@ public class DialogueField : MonoBehaviour
     private List<string> currentDialogue;
     private string currentLine;
     private int lineIndex;
+    private bool isConvo;
 
     public delegate void TextAnimationDelegate(bool isActive);
     public TextAnimationDelegate OnDialogue;
@@ -38,6 +44,13 @@ public class DialogueField : MonoBehaviour
     private void OnEnable()
     {
         continueButton.onClick.AddListener(OnButton);
+
+        if (startOnEnable)
+        {
+            List<string> parts = presetText.Split(new string[] { "/p" }, StringSplitOptions.None).ToList();
+            SetDialogue(parts);
+
+        }
     }
 
     private void OnDisable()
@@ -45,9 +58,25 @@ public class DialogueField : MonoBehaviour
         continueButton.onClick.RemoveListener(OnButton);
     }
 
-    public void SetDialogue(List<string> dialogue)
+    public void SetDialogue(List<string> dialogue, bool convo = false)
     {
-        currentDialogue = dialogue;
+        isConvo = convo;
+        List<string> updatedList = new List<string>();
+
+        foreach (string text in dialogue)
+        {
+            string[] parts = text.Split(new string[] { "/p" }, System.StringSplitOptions.None);
+
+            foreach (string part in parts)
+            {
+                string trimmed = part.Trim();
+                trimmed.Replace("[player]", GameManager.Instance.PlayerName1);
+                if (!string.IsNullOrEmpty(trimmed))
+                    updatedList.Add(trimmed);
+            }
+        }
+        Debug.Log(updatedList.Count);
+        currentDialogue = updatedList;
         lineIndex = 0;
         currentLine = currentDialogue[lineIndex];
         NextLine(currentLine);
@@ -57,12 +86,14 @@ public class DialogueField : MonoBehaviour
 
     private void NextLine(string line)
     {
+        if(line == null) { Debug.Log("no dialogue found "); return; }
         animationCoroutine = StartCoroutine(TextAnimation(line));
     }
 
     private void SkipAnimation()
     {
-        OnDialogue.Invoke(false);
+        if(isConvo)
+            OnDialogue.Invoke(false);
         StopCoroutine(animationCoroutine);
         animationCoroutine = null;
         textField.text = currentLine;
@@ -71,16 +102,18 @@ public class DialogueField : MonoBehaviour
     private IEnumerator TextAnimation(string str)
     {
         textField.text = "";
-        OnDialogue.Invoke(true);
+        if(isConvo)
+            OnDialogue.Invoke(true);
         for (int i = 0; i <= str.Length - 1; i++)
         {
-            audioSource.pitch = Random.Range(pitchRange.x, pitchRange.y);
+            audioSource.pitch = UnityEngine.Random.Range(pitchRange.x, pitchRange.y);
             audioSource.Play();
 
             textField.text += str[i];
             yield return new WaitForSeconds(0.1f / letterSpeed);
         }
-        OnDialogue.Invoke(false);
+        if(isConvo)
+            OnDialogue.Invoke(false);
         animationCoroutine = null;
     }
 
@@ -98,7 +131,8 @@ public class DialogueField : MonoBehaviour
         }
         else
         {
-            CharacterManager.Instance.ToggleConversationUI(false);
+            if (isConvo) { CharacterManager.Instance.EndConversation(); }
+            else { overButton.gameObject.SetActive(true); }
         }
     }
 }

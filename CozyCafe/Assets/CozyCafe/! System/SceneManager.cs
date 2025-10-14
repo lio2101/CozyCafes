@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System.Linq;
 using System.Collections;
 using System.ComponentModel.Design;
+using Unity.VisualScripting;
 
 public class SceneManager : MonoBehaviour
 {
@@ -13,13 +14,7 @@ public class SceneManager : MonoBehaviour
     [SerializeField] private float buttonCooldown = 2.0f;
     [SerializeField] private float animationDuration = 1.0f;
 
-
-    [Header("Backgrounds")]
-    [SerializeField] private Image[] backGrounds;
-
-
     private float screenWidth;
-    private int currentBg;
     private bool isFront;
 
 
@@ -28,10 +23,9 @@ public class SceneManager : MonoBehaviour
         screenWidth = Camera.main.orthographicSize * 2f * Camera.main.aspect;
         isFront = true;
         frontScene.SetActive(true);
-        backScene.SetActive(false);
 
-        currentBg = 0;
-        ChangeBackground();
+        Vector3 distance = backScene.transform.position + Vector3.right * screenWidth;
+        backScene.transform.position = backScene.transform.position + distance;
     }
 
     private void OnEnable()
@@ -44,15 +38,6 @@ public class SceneManager : MonoBehaviour
     {
         changeToBack.onClick.RemoveListener(() => ChangeScene(0));
         changeToFront.onClick.AddListener(() => ChangeScene(1));
-    }
-
-    public void ChangeBackground()
-    {
-        foreach (Image img in backGrounds)
-            img.enabled = false;
-
-        currentBg++;
-        backGrounds[currentBg].enabled = true;
     }
 
 

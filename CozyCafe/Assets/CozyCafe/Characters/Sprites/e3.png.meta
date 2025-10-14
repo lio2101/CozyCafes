@@ -5,6 +5,12 @@ TextureImporter:
   - first:
       213: -8674146233321178474
     second: e3_0
+  - first:
+      213: -4001430064766718173
+    second: e3_1
+  - first:
+      213: 6378157042808153250
+    second: e3_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -116,10 +122,10 @@ TextureImporter:
       name: e3_0
       rect:
         serializedVersion: 2
-        x: 93
-        y: 0
-        width: 414
-        height: 518
+        x: 90
+        y: 185
+        width: 9
+        height: 8
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -130,6 +136,50 @@ TextureImporter:
       bones: []
       spriteID: 69a391955fd3f9780800000000000000
       internalID: -8674146233321178474
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: e3_1
+      rect:
+        serializedVersion: 2
+        x: 91
+        y: 0
+        width: 418
+        height: 574
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 32fe20c7e801878c0800000000000000
+      internalID: -4001430064766718173
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: e3_2
+      rect:
+        serializedVersion: 2
+        x: 501
+        y: 185
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a46c3a9904c38850800000000000000
+      internalID: 6378157042808153250
       vertices: []
       indices: 
       edges: []

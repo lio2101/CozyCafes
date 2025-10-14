@@ -1,27 +1,20 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
+    [Header("Game States")]
+    [SerializeField] private GameObject mainMenu;
+    [SerializeField] private GameObject introScreen;
     [SerializeField] private GameObject pauseScreen;
+    [SerializeField] private GameObject scenes;
+
+
+
     [SerializeField] private GameObject menuScreen;
-    [SerializeField] private GameObject saveScreen;
     [SerializeField] private GameObject settingsScreen;
     [SerializeField] private GameObject exitScreen;
-
-
-    [SerializeField] private Button pauseButton;
-
-    [Header("Menu Elements")]
-    [SerializeField] private Button continueButton;
-    [SerializeField] private Button saveButton;
-    [SerializeField] private Button settingsButton;
-    [SerializeField] private Button exitButton;
-
-    [Header("Exit Questions")]
-    [SerializeField] private Button yesButton;
-
-    private bool isPaused;
 
 
     private void OnEnable()
@@ -29,69 +22,30 @@ public class MenuManager : MonoBehaviour
         pauseScreen.SetActive(false);
         menuScreen.SetActive(false);
         settingsScreen.SetActive(false);
-        saveScreen.SetActive(false);
         exitScreen.SetActive(false);
-        exitScreen.SetActive(false);
-
-        pauseButton.onClick.AddListener(OnPause);
-        continueButton.onClick.AddListener(OnPause);
-        saveButton.onClick.AddListener(OnSave);
-        settingsButton.onClick.AddListener(OnSettings);
-        exitButton.onClick.AddListener(OnExit);
-        yesButton.onClick.AddListener(OnExitConfirmed);
     }
-
-    private void OnDisable()
+    public void StartMainMenu()
     {
-        pauseButton.onClick.RemoveListener(OnPause);
-        continueButton.onClick.RemoveListener(OnPause);
-        saveButton.onClick.RemoveListener(OnSave);
-        settingsButton.onClick.RemoveListener(OnSettings);
-        exitButton.onClick.RemoveListener(OnExit);
-        yesButton.onClick.RemoveListener(OnExitConfirmed);
+        mainMenu.SetActive(true);
+        pauseScreen.SetActive(false);
+        introScreen.SetActive(false);
+        scenes.SetActive(false);
     }
 
-    private void OnPause()
+    public void SkipIntro()
     {
-        if (!isPaused)
-        {
-            pauseScreen.SetActive(true);
-            menuScreen.SetActive(true);
-            pauseButton.interactable = false;
-        }
-        else
-        {
-            pauseScreen.SetActive(false);
-            menuScreen.SetActive(false);
-            pauseButton.interactable = true;
-
-        }
-        isPaused = !isPaused;
-
-        //gm paused
+        mainMenu.SetActive(false);
+        introScreen.SetActive(false);
+        scenes.SetActive(true);
+        GameManager.Instance.SetName("Player");
+        GameManager.Instance.StartGame();
     }
-
-    private void OnSave()
+    public void FinishIntro()
     {
-        menuScreen.SetActive(false);
-        saveScreen.SetActive(true);
+        mainMenu.SetActive(false);
+        introScreen.SetActive(false);
+        scenes.SetActive(true);
+        GameManager.Instance.StartGame();
     }
 
-    private void OnSettings()
-    {
-        menuScreen.SetActive(false);
-        settingsScreen.SetActive(true);
-    }
-
-    private void OnExit()
-    {
-        exitScreen.SetActive(true);
-    }
-
-    private void OnExitConfirmed()
-    {
-        Debug.Log("Appl Quit");
-        //GameManager.Exit
-        Application.Quit();
-    }
 }

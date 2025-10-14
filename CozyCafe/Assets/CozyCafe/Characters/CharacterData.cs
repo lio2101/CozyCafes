@@ -30,9 +30,12 @@ public enum FeedbackType
 {
     CorrectDrink,
     CorrectAgain,
-    WrongRoast,
-    WrongMilk,
-    WrongFlavor
+    TooLightRoast,
+    TooDarkRoast,
+    TooLittleMilk,
+    TooMuchMilk,
+    WrongFlavor,
+    NoFlavor
 }
 
 // Structs
@@ -73,7 +76,7 @@ public struct Feedback
 public class CharacterData : ScriptableObject
 {
     // Fields
-
+    [Header("Info")]
     [SerializeField] private string charName;
     [SerializeField] private BeverageData favoriteDrink;
 
@@ -84,9 +87,15 @@ public class CharacterData : ScriptableObject
     [SerializeField] private List<Greeting> greetings = new();
     [SerializeField] private List<Order> orders = new();
     [SerializeField] private List<Feedback> feedbacks = new();
-    [SerializeField] string[] story;
+    [SerializeField] private string goodbye;
+    [SerializeField] private string[] story = new string[5];
 
     private int storyprogress = 0;
+
+    private bool isReturning = false;
+    private bool wasCorrect = false;
+    private bool wasCorrectAgain = false;
+    private bool isCorrect = false;
 
 
     // Properties
@@ -97,8 +106,22 @@ public class CharacterData : ScriptableObject
     public List<Greeting> Greetings => greetings;
     public List<Order> Orders => orders;
     public List<Feedback> Feedbacks => feedbacks;
+    public string Goodbye => goodbye;
     public string[] Story => story;
 
     public int StoryProgress {  get { return storyprogress; } set {  storyprogress = value; } }
+
+    public bool IsReturning { get { return isReturning; } set { isReturning = value; } }
+    public bool WasCorrect { get {  return wasCorrect; } set {  wasCorrect = value; } }
+    public bool WasCorrectAgain { get { return  wasCorrectAgain; } set { wasCorrectAgain = value; } }
+
+    public bool IsCorrect { get { return isCorrect; } set { isCorrect = value; } }
+
+
+    // First story part on the third visit
+    // Second story part on the fifth visit > greeting goes to mid sym
+    // Third story part when player gets the drink right , or right after fifth visit
+    // Fourth story part when player got drink right 3 times
+    // greeting goes to high sym, player gets item
 
 }

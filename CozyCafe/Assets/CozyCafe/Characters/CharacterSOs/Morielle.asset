@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2d2898401ec342499cc7c0c9ef95607, type: 3}
+  m_Name: Morielle
+  m_EditorClassIdentifier: 
+  charName: Morielle
+  favoriteDrink:
+    type: 3
+    amount: 0
+    flavor: 2
+  expressions:
+  - type: 0
+    sprite: {fileID: -8251610326034200038, guid: fbd86221287b9234686310abff587526, type: 3}
+  - type: 1
+    sprite: {fileID: 4321518268088089880, guid: 9a103811668171046be28db963d2fe6a, type: 3}
+  - type: 2
+    sprite: {fileID: -4826691987311988304, guid: 329cbda2b6c65074885fad4042c00098, type: 3}
+  greetings:
+  - type: 0
+    text: Hi ! It's my first time here
+  - type: 1
+    text: Hi. We don't know each other
+  - type: 3
+    text: Hi. We are friends
+  - type: 4
+    text: Hi. We are best friends.
+  orders:
+  - type: 0
+    text: This is my first time ordering. I like bitter chocolate
+  - type: 1
+    text: One drink that tastes bitter chocolate
+  - type: 2
+    text: The same as last time please
+  - type: 3
+    text: The same as always please
+  feedbacks:
+  - type: 0
+    text: Wow this is correct
+  - type: 1
+    text: Correct as always
+  - type: 2
+    text: This makes me feel a bit too hyper
+  - type: 3
+    text: This kind of makes me feel sleepy.
+  - type: 4
+    text: This is very strong. I think i prefer more milk.
+  - type: 5
+    text: This has too much milk for me
+  - type: 6
+    text: I'm not a big fan of [flavor] sorry
+  - type: 7
+    text: Hmm I feel like something is missing.
+  goodbye: Goodbye
+  story:
+  - Insert story part 1
+  - Insert story part 2
+  - Insert story part 3
+  - Insert story part 4
+  - Insert story part 5

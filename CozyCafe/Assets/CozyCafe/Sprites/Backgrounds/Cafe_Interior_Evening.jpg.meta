@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 08baf180fc4d8144b8c3ae9289f2f7e6
+guid: 5d924abc77e128c4980e84ec9cced62b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7479396064126986413
-    second: Cafe_Interior_Evening_0
+      213: 9035854690315300367
+    second: Cafe_Interior_Dawn_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -113,7 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Cafe_Interior_Evening_0
+      name: Cafe_Interior_Dawn_0
       rect:
         serializedVersion: 2
         x: 0
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 357914f38e8d33890800000000000000
-      internalID: -7479396064126986413
+      spriteID: f0e6a4287fdc56d70800000000000000
+      internalID: 9035854690315300367
       vertices: []
       indices: 
       edges: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Cafe_Interior_Dawn_0: 9035854690315300367
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
