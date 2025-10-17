@@ -12,6 +12,7 @@ public class CharacterManager : MonoBehaviour
     [SerializeField] private DialogueField dialogueField;
     [SerializeField] private Button interactButton;
     [SerializeField] private AudioClip doorSound;
+    [SerializeField] private BeverageManager beverageManager;
 
     [Header("Character Settings")]
     [SerializeField] private static int CHARACTERSPERDAY = 3;
@@ -59,6 +60,7 @@ public class CharacterManager : MonoBehaviour
 
         returningCharacters.Clear();
         ResetDay();
+        beverageManager.CreateButton(true);
     }
 
     void OnEnable()
@@ -180,6 +182,7 @@ public class CharacterManager : MonoBehaviour
             ToggleButton(false);
             dialogueField.SetDialogue(activeCharacter.GetConversation(hasOrdered), true);
             hasOrdered = true;
+            beverageManager.CreateButton(true);
         }
 
         else
@@ -199,6 +202,7 @@ public class CharacterManager : MonoBehaviour
                     dialogueField.SetDialogue(activeCharacter.GetConversation(hasOrdered), true);
 
                     hasOrdered = false;
+                    beverageManager.CreateButton(false);
                 }
                 else { Debug.Log("Drink not ready"); }
             }

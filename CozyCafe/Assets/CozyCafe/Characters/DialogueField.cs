@@ -75,7 +75,6 @@ public class DialogueField : MonoBehaviour
                     updatedList.Add(trimmed);
             }
         }
-        Debug.Log(updatedList.Count);
         currentDialogue = updatedList;
         lineIndex = 0;
         currentLine = currentDialogue[lineIndex];

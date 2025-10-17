@@ -111,9 +111,9 @@ public class Character : MonoBehaviour
                 newConvo.Add(feedback);
             }
 
-            if (charDrink.Equals(givenDrink))
+            else if(feedbackRoul.Count == 0)
             {
-                //AllCorrect
+                //AllCorrect this dont work
                 newConvo.Add(GetLine(FeedbackType.CorrectDrink));
             }
             //End
@@ -153,18 +153,20 @@ public class Character : MonoBehaviour
 
     private IEnumerator SpawnRoutine()
     {
-        CharacterManager.Instance.PlaySound();
 
         float elapsedTime = 0;
         Color startColor = currentSprite.color;
         startColor.a = 0f;
         Color endColor = startColor;
         endColor.a = 1f;
-        float dur = CharacterManager.Instance.AppearAnimationDuration;
-
         currentSprite.color = startColor;
+
+        yield return new WaitForSeconds(2);
+        CharacterManager.Instance.PlaySound();
+
         yield return new WaitForSeconds(CharacterManager.Instance.TimeBeforeAppear);
 
+        float dur = CharacterManager.Instance.AppearAnimationDuration;
         //Fade in
         while (elapsedTime < dur)
         {

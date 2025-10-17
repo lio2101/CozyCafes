@@ -1,142 +1,127 @@
 using System;
 using System.Linq;
-using System.Text.RegularExpressions;
-using System.Xml.Schema;
 using TMPro;
-using UnityEditor.Build.Content;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using UnityEngine.Windows;
-using static BeverageData;
+using static System.Net.Mime.MediaTypeNames;
 
 
 // Enums
 [System.Serializable]
 public enum IngredientType
 {
-    Roast,
+    LightRoast,
+    MediumRoast,
+    MediumDarkRoast,
+    DarkRoast,
     Milk,
-    Flavor
+    Caramel,
+    Cocoa,
+    Vanilla
 }
 
-public class Ingredient : MonoBehaviour
+public class Ingredient : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] IngredientType ingredientType;
-    [SerializeField] IngredientData ingredientinfos;
-    [SerializeField] private GameObject submenuPrefab;
-    [SerializeField] private GameObject buttonPrefab;
-    [SerializeField] private Transform backViewParent;
+    [SerializeField] AudioClip pickupSound;
+    [SerializeField] AudioClip ingredientSound;
+    [TextArea(2, 10)][SerializeField] string ingredientinfo;
+    [SerializeField] private bool isPickupable;
+    [SerializeField] private int pickupRange = 20;
 
     private Button interactButton;
-    private GameObject submenuInstance;
-
-    private RectTransform submenuRect;
-    private RectTransform ingredientRect;
-    private Canvas rootCanvas;
-
+    private HoverText hover;
+    private AudioSource audioSource;
 
     void Awake()
     {
         interactButton = GetComponentInChildren<Button>();
-        ingredientRect = GetComponent<RectTransform>();
-        rootCanvas = GetComponentInParent<Canvas>();
+        hover = GetComponentInChildren<HoverText>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
     {
-        CreateSubmenu();
-        submenuInstance.SetActive(false); // hide it initially
-
+        //set text
+        string title = ObjectNames.NicifyVariableName(ingredientType.ToString());
+        string info = ingredientinfo;
+        hover.SetHover(title, info);
     }
 
     private void OnEnable()
     {
-        interactButton.onClick.AddListener(ToggleSubmenu);
+        interactButton.onClick.AddListener(OnOptionSelected);
     }
 
     private void OnDisable()
     {
-        interactButton.onClick.RemoveListener(ToggleSubmenu);
+        interactButton.onClick.RemoveListener(OnOptionSelected);
     }
 
-    private void ToggleSubmenu()
-    {
-        submenuInstance.SetActive(!submenuInstance.activeSelf);
-    }
-
-    private void CreateSubmenu()
-    {
-        submenuInstance = Instantiate(submenuPrefab, this.gameObject.transform);
-        submenuInstance.name = $"{ingredientType} Submenu";
-
-        // Reposition?
-        //submenuRect = submenuInstance.GetComponent<RectTransform>();
-        //RectTransform thisRect = this.GetComponent<RectTransform>();
-        //float rectHeight = thisRect.rect.height;
-        //Vector3 newpos = new Vector3(thisRect.rect.position.x, (thisRect.rect.position.y + rectHeight), 0);
-        //submenuRect.transform.localPosition = new Vector3(newpos.x, 0, 0);
-
-
-        Type enumType = ingredientType switch
-        {
-            IngredientType.Roast => typeof(RoastType),
-            IngredientType.Milk => typeof(MilkAmount),
-            IngredientType.Flavor => typeof(ExtraFlavor),
-            _ => null
-        };
-
-        foreach (var value in Enum.GetValues(enumType))
-        {
-            GameObject btnObj = Instantiate(buttonPrefab, submenuInstance.transform);
-            btnObj.name = value.ToString();
-
-            TMP_Text label = btnObj.GetComponentInChildren<TMP_Text>();
-            string formattedText = Regex.Replace(value.ToString(), "(?<!^)([A-Z])", " $1");
-            label.text = formattedText;
-
-            Button btn = btnObj.GetComponentInChildren<Button>();
-            btn.onClick.AddListener(() => OnOptionSelected(value));
-        }
-
-        submenuInstance.SetActive(false);
-    }
-
-    private void OnOptionSelected(object value)
+    private void OnOptionSelected()
     {
         if (Beverage.ActiveDrink == null) return; // no active cup
 
+        audioSource.clip = ingredientSound;
+        audioSource.Play();
+
         switch (ingredientType)
         {
-            case IngredientType.Roast:
+            case IngredientType.LightRoast:
                 if (!Beverage.ActiveDrink.BeverageData.HasType)
                 {
-                    Beverage.ActiveDrink.SelectRoast((RoastType)value);
-                    //Debug.Log("Added Roasttype: " + Enum.GetName(typeof(RoastType), value));
-                    ToggleSubmenu();
+                    Beverage.ActiveDrink.SelectRoast(RoastType.Light);
                 }
-                else { Debug.Log("Already added Roast"); }
+                break;
+            case IngredientType.MediumRoast:
+                if (!Beverage.ActiveDrink.BeverageData.HasType)
+                {
+                    Beverage.ActiveDrink.SelectRoast(RoastType.Medium);
+                }
+                break;
+            case IngredientType.MediumDarkRoast:
+                if (!Beverage.ActiveDrink.BeverageData.HasType)
+                {
+                    Beverage.ActiveDrink.SelectRoast(RoastType.MediumDark);
+                }
+                break;
+            case IngredientType.DarkRoast:
+                if (!Beverage.ActiveDrink.BeverageData.HasType)
+                {
+                    Beverage.ActiveDrink.SelectRoast(RoastType.Dark);
+                }
                 break;
             case IngredientType.Milk:
-                if (!Beverage.ActiveDrink.BeverageData.HasMilk)
-                {
-                    Beverage.ActiveDrink.SelectMilk((MilkAmount)value);
-                    //Debug.Log("Added Milk: " + Enum.GetName(typeof(MilkAmount), value));
-                    ToggleSubmenu();
-                }
-                else { Debug.Log("Already added Milk"); }
-
+                Beverage.ActiveDrink.AddMilk();
                 break;
-            case IngredientType.Flavor:
-                if (!Beverage.ActiveDrink.BeverageData.HasFlavor)
-                {
-                    Beverage.ActiveDrink.SelectFlavor((ExtraFlavor)value);
-                    //Debug.Log("Added Flavor: " + Enum.GetName(typeof(ExtraFlavor), value));
-                    ToggleSubmenu();
-                }
-                else { Debug.Log("Already added Flavor"); }
-
+            case IngredientType.Caramel:
+                Beverage.ActiveDrink.AddFlavor(ExtraFlavor.Caramel);
+                break;
+            case IngredientType.Cocoa:
+                Beverage.ActiveDrink.AddFlavor(ExtraFlavor.Cocoa);
+                break;
+            case IngredientType.Vanilla:
+                Beverage.ActiveDrink.AddFlavor(ExtraFlavor.Vanilla);
                 break;
         }
+
     }
 
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        //pick up
+        this.gameObject.GetComponent<RectTransform>().offsetMin = new Vector2(0, pickupRange);
+
+        audioSource.clip = pickupSound;
+        audioSource.pitch = UnityEngine.Random.Range(0.8f, 1.2f);
+        audioSource.Play();
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        this.gameObject.GetComponent<RectTransform>().offsetMin = new Vector2(0, 0);
+        //set down
+    }
 }

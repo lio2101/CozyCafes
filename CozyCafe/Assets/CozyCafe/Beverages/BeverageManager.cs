@@ -1,27 +1,24 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class BeverageManager : MonoBehaviour
 {
-    [SerializeField] private Button[] createButton;
+    [SerializeField] private Button createButton;
     [SerializeField] private Button deleteButton;
     [SerializeField] private GameObject cupPrefab;
 
+
     private void OnEnable()
     {
-        foreach (var button in createButton)
-        {
-            button.onClick.AddListener(NewBeverage);
-        }
+        createButton.onClick.AddListener(NewBeverage);
         deleteButton.onClick.AddListener(DeleteBeverage);
+        createButton.gameObject.SetActive(false);
     }
 
     private void OnDisable()
     {
-        foreach (var button in createButton)
-        {
-            button.onClick.RemoveListener(NewBeverage);
-        }
+        createButton.onClick.RemoveListener(NewBeverage);
         deleteButton.onClick.RemoveListener(DeleteBeverage);
     }
 
@@ -29,8 +26,13 @@ public class BeverageManager : MonoBehaviour
     {
         if (Beverage.ActiveDrink == null)
         {
-            GameObject newbev = Instantiate(cupPrefab, this.transform);
-            newbev.transform.localScale = Vector3.one * 10;
+            if (CharacterManager.Instance.HasOrdered)
+            {
+                createButton.gameObject.SetActive(false);
+                GameObject newbev = Instantiate(cupPrefab, this.transform);
+                newbev.transform.localScale = Vector3.one * 10;
+            }
+            else { Debug.Log("No Order active"); }
         }
         else { Debug.Log("Drink already active"); }
     }
@@ -39,7 +41,15 @@ public class BeverageManager : MonoBehaviour
     {
         if (Beverage.ActiveDrink != null)
         {
+            deleteButton.GetComponent<AudioSource>().Play();
+            Beverage.ActiveDrink.TryGetFull();
             Destroy(Beverage.ActiveDrink.gameObject);
+            createButton.gameObject.SetActive(true);
         }
+    }
+
+    public void CreateButton(bool b)
+    {
+        createButton.gameObject.SetActive(b);
     }
 }

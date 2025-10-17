@@ -1,18 +1,22 @@
+using NUnit.Framework;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Background : MonoBehaviour
 {
-    [SerializeField] private Image[] backGrounds;
-    [SerializeField] private float animDuration = 3.0f;
+    [SerializeField] private List<Image> images;
+    [SerializeField] private float fadeDuration = 3.0f;
 
 
-    int currentIndex;
+    int index;
 
     private void Start()
     {
-        currentIndex = 0;
+        index = 0;
+        foreach (Image image in images) { image.color = new Color(1, 1, 1, 0); }
+        images[0].color = new Color(1, 1, 1, 1);
     }
 
     private void OnEnable()
@@ -26,62 +30,33 @@ public class Background : MonoBehaviour
 
     private void ChangeBackground()
     {
-        //animation here, test it
-        Debug.Log("setting bg to " + currentIndex);
-
-        foreach (var bg in backGrounds)
-        {
-            bg.enabled = false;
-        }
-        if (currentIndex < backGrounds.Length)
-        {
-            backGrounds[currentIndex].enabled = true;
-            backGrounds[currentIndex + 1].enabled = true;
-            StartCoroutine(ChangeBackgroundAnimation(backGrounds[currentIndex], backGrounds[currentIndex + 1]));
-            currentIndex = (currentIndex < backGrounds.Length ? currentIndex + 1 : 0);
-        }
-        else
-        {
-            Debug.Log("day over");
-            backGrounds[currentIndex].enabled = true;
-            backGrounds[0].enabled = true;
-            StartCoroutine(ChangeBackgroundAnimation(backGrounds[currentIndex], backGrounds[0]));
-            currentIndex = 0;
-        }
-
+        StartCoroutine(AnimationRoutine());
     }
 
-    private IEnumerator ChangeBackgroundAnimation(Image cur, Image next)
+    private IEnumerator AnimationRoutine()
     {
 
+        Image cur = images[index];
+        Image next = images[(index + 1) % images.Count];
 
-        float elapsedTime = 0;
-        Color currentColorA = cur.color;
-        currentColorA.a = 1f;
-        Color currentColorB = currentColorA;
-        currentColorB.a = 0f;
+        // Ensure next starts invisible but above current
+        next.color = new Color(1, 1, 1, 0);
+        next.transform.SetAsLastSibling(); // move next on top
 
-        Color nextColorA = next.color;
-        currentColorA.a = 0f;
-        Color nextColorB = currentColorA;
-        currentColorB.a = 1f;
+        float elapsedTime = 0f;
 
-        cur.color = currentColorA;
-        next.color = nextColorB;
-
-
-
-        //Fade in
-        while (elapsedTime < animDuration)
+        while (elapsedTime < fadeDuration)
         {
-            float t = elapsedTime / animDuration;
-            cur.color = Color.Lerp(currentColorA, currentColorB, t);
-            next.color = Color.Lerp(nextColorA, nextColorB, t);
+            float t = elapsedTime / fadeDuration;
+            next.color = new Color(1, 1, 1, t);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-        cur.color = currentColorB;
-        next.color = nextColorB;
+
+        next.color = new Color(1, 1, 1, 1);
+        cur.color = new Color(1, 1, 1, 0);
+
+        index = (index + 1) % images.Count;
     }
 
 }

@@ -52,14 +52,16 @@ public class GameManager : MonoBehaviour
 
     public void FinishDay()
     {
-        NextTimeWindowEvent.Invoke();
+        NextTimeWindowEvent.Invoke(); //to night
+        
+
         Debug.Log("Day finished");
+
         //Change
     }
 
     public void NewTimeWindow()
     {
-        Debug.Log("GM newtimewindow");
         NextTimeWindowEvent.Invoke();
     }
 
@@ -79,25 +81,21 @@ public class GameManager : MonoBehaviour
 
     // to do next: 
     // full day cycle
-    // replace buttons
     // sprite outline on mouse enter?
-    // 3 characters
-    // 3 characters
     // sound effects
 
     // to do at some point:
     //char on sprite change jump
     // book for notes
-    // fix settings
-    // save file when day ends
+    // game paused animation
+    // trinket for completing story
 
 
 
     // if time
-    // make drink random for character?
+    // fix settings
+    // save file when day ends
     // pixel effects?
-    // game paused animation
-    // trinket for completing story
     // interactable story? multiple choice? happy ending?
 
 
