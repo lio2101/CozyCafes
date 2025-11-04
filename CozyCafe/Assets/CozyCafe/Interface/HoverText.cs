@@ -10,16 +10,18 @@ using static UnityEngine.Rendering.DebugUI;
 public class HoverText : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private GameObject hoverPrefab;
-    [SerializeField] private Vector2 offset;
 
+    [Header("Hover Info")]
+    [SerializeField] string title;
+    [TextArea(2, 10)][SerializeField] string info;
+    [TextArea(2, 10)][SerializeField] string usage;
+
+    private Vector2 offset = new Vector2(175, 50);
     private RectTransform canvasRect;
     private bool isHovering = false;
     private RectTransform hoverRect;
     private GameObject currentHoverObject;
     private static Canvas hoverCanvas;
-
-    private string thisTitle;
-    private string thisInfo;
 
     private void Awake()
     {
@@ -27,9 +29,10 @@ public class HoverText : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
             hoverCanvas = GameObject.Find("HoverCanvas")?.GetComponent<Canvas>();
         canvasRect = hoverCanvas.GetComponent<RectTransform>();
     }
+
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if(currentHoverObject != null)
+        if (currentHoverObject != null)
         {
             Destroy(currentHoverObject.gameObject);
             currentHoverObject = null;
@@ -42,11 +45,11 @@ public class HoverText : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
             g.raycastTarget = false;
 
         TMP_Text[] texts = currentHoverObject.GetComponentsInChildren<TMP_Text>();
-        texts[0].text = thisTitle;
-        texts[1].text = thisInfo;
+        texts[0].text = title;
+        texts[1].text = info;
+        texts[2].text = usage;
 
         StartCoroutine(FollowMouse());
-
     }
 
     public void OnPointerExit(PointerEventData eventData)
@@ -61,12 +64,6 @@ public class HoverText : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         Destroy(currentHoverObject);
         currentHoverObject = null;
         isHovering = false;
-    }
-
-    public void SetHover(string title, string text)
-    {
-        thisTitle = title;
-        thisInfo = text;
     }
 
     private IEnumerator FollowMouse()

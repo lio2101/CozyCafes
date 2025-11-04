@@ -40,6 +40,10 @@ public class SceneManager : MonoBehaviour
         changeToFront.onClick.AddListener(() => ChangeScene(1));
     }
 
+    public void Togglebutton(bool b)
+    {
+        changeToBack.gameObject.SetActive(b);
+    }
 
     private void ChangeScene(int index)
     {
@@ -51,6 +55,7 @@ public class SceneManager : MonoBehaviour
 
         //game manager active scene
     }
+
 
 
     private IEnumerator ButtonCooldownRoutine()

@@ -1231,7 +1231,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Folding & Cutout Paper UI SpriteSheet_11
+      name: bgpaper
       rect:
         serializedVersion: 2
         x: 573
@@ -1429,7 +1429,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Folding & Cutout Paper UI SpriteSheet_20
+      name: paper
       rect:
         serializedVersion: 2
         x: 48
@@ -3035,7 +3035,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Folding & Cutout Paper UI SpriteSheet_93
+      name: bookback
       rect:
         serializedVersion: 2
         x: 879
@@ -7448,7 +7448,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
+      bgpaper: -1632611439974555067
       book: -576057477237516270
+      bookback: 762498144434278161
+      paper: 8502366743004171901
       window paper: 3510565236416966051
       window paper 1: -4906773764181241742
   mipmapLimitGroupName: 

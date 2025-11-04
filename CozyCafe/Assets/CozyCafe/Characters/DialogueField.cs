@@ -11,6 +11,8 @@ using UnityEngine.UI;
 public class DialogueField : MonoBehaviour
 {
     [TextArea(5, 10)][SerializeField] private string presetText;
+    [SerializeField] private TMP_Text textField;
+    [SerializeField] private TMP_Text nameText;
     [SerializeField] private bool startOnEnable;
     [SerializeField] private AudioClip babbleAudio;
     [SerializeField] private Button continueButton;
@@ -23,7 +25,6 @@ public class DialogueField : MonoBehaviour
     [SerializeField] private Vector2 pitchRange = new Vector2(0.8f, 1.2f);
 
     private AudioSource audioSource;
-    private TMP_Text textField;
     private Coroutine animationCoroutine;
 
     private List<string> currentDialogue;
@@ -36,7 +37,6 @@ public class DialogueField : MonoBehaviour
 
     private void Awake()
     {
-        textField = GetComponentInChildren<TMP_Text>();
         audioSource = GetComponent<AudioSource>();
         audioSource.clip = babbleAudio;
     }
@@ -58,6 +58,11 @@ public class DialogueField : MonoBehaviour
         continueButton.onClick.RemoveListener(OnButton);
     }
 
+    public void Setname(string name)
+    {
+        nameText.text = name;
+    }
+
     public void SetDialogue(List<string> dialogue, bool convo = false)
     {
         isConvo = convo;
@@ -70,7 +75,7 @@ public class DialogueField : MonoBehaviour
             foreach (string part in parts)
             {
                 string trimmed = part.Trim();
-                trimmed.Replace("[player]", GameManager.Instance.PlayerName1);
+                trimmed = trimmed.Replace("[player]", GameManager.Instance.PlayerName1);
                 if (!string.IsNullOrEmpty(trimmed))
                     updatedList.Add(trimmed);
             }
@@ -87,6 +92,9 @@ public class DialogueField : MonoBehaviour
     {
         if(line == null) { Debug.Log("no dialogue found "); return; }
         animationCoroutine = StartCoroutine(TextAnimation(line));
+
+        if(isConvo)
+            CharacterManager.Instance.Jump();
     }
 
     private void SkipAnimation()
@@ -131,7 +139,11 @@ public class DialogueField : MonoBehaviour
         else
         {
             if (isConvo) { CharacterManager.Instance.EndConversation(); }
-            else { overButton.gameObject.SetActive(true); }
+            else 
+            { 
+                overButton.gameObject.SetActive(true); 
+                this.gameObject.SetActive(false);
+            }
         }
     }
 }

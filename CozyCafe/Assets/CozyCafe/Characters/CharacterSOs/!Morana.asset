@@ -1,0 +1,98 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2d2898401ec342499cc7c0c9ef95607, type: 3}
+  m_Name: '!Morana'
+  m_EditorClassIdentifier: 
+  notes: royal family, pressure
+  charName: Princess Morana
+  favoriteDrink:
+    type: 1
+    amount: 2
+    flavor: 2
+  storyprogress: 0
+  visitAmount: 0
+  correctAmount: 0
+  expressions:
+  - type: 0
+    sprite: {fileID: -1312822776244907393, guid: 4f355d4a0c9800a469e4335cc19c8713, type: 3}
+  - type: 1
+    sprite: {fileID: -862659620070987507, guid: 6fd72ef18f67064409cbd9627732d0cc, type: 3}
+  - type: 2
+    sprite: {fileID: 8695345818136056482, guid: 33deee63c7be1b14392d72fc74d0bb89, type: 3}
+  greetings:
+  - type: 0
+    text: Good morrow. I have been apprised of this new establishment and intend
+      to make a trial of its wares.
+  - type: 1
+    text: Good morrow to thee, Barista.
+  - type: 2
+    text: Good morrow [player]. I trust thou art not too burdened with thy labors.
+      Remember to grant thyself breaks from thy tasks.
+  orders:
+  - type: 0
+    text: "One of mine attendants hails from the same world as thou, and did commend
+      unto me a beverage called a \u201Cmocha.\u201D"
+  - type: 1
+    text: One serving of this so-called 'mocha' ,  if thou wilt.
+  - type: 2
+    text: I shall have the same as before, prithee.
+  - type: 3
+    text: I shall take mine usual, if thou wilt be so kind.
+  feedbacks:
+  - type: 0
+    text: This draught is most delectable. Verily, this must be the beverage of which
+      mine attendant spake. /p I thank thee most graciously.
+  - type: 1
+    text: Splendid, as ever. My thanks unto thee.
+  - type: 2
+    text: The aftertaste of this beverage doth seem amiss. Yet I am certain thou
+      shalt excel upon the morrow.
+  - type: 3
+    text: The aftertaste of this concoction doth seem amiss; yet I am certain thou
+      shalt excel upon the morrow.
+  - type: 4
+    text: Methinks this beverage would fare better with more milk. Mayhap thou shalt
+      perfect it anon.
+  - type: 5
+    text: "Hmmm\u2026 this measure of milk doth somewhat weaken the flavor. What
+      a pity."
+  - type: 6
+    text: I know not if this taste belongeth rightly to a mocha. Perchance thou shouldst
+      attempt another next time?
+  - type: 7
+    text: A trifle bland. Something, methinks, is wanting.
+  goodbye: If thou wilt pardon me, I must away to attend other affairs.
+  story:
+  - This place doth serve as a most pleasant respite from the burdens of mine accustomed
+    royal duties. /p Of late, I am oft summoned to councils concerning my future.
+    /p Yet, truth be told, I hold no fondness for any of the suitors my father doth
+    present as candidates for marriage. /p Though I feel bound by duty to make a
+    choice, my heart inclineth me otherwise. /p I beseech thee, keep this knowledge
+    in thy confidence.
+  - "Of recent days I have found myself in greater discourse with the townsfolk that
+    dwell along these streets. /p They bear a warmth far truer than the hollow courtesies
+    spoken within the walls of my family\u2019s estate. /p A young maiden did offer
+    me a pastry, slightly underbaked, yet most endearing, /p and it did fill my heart
+    with a curious joy. I find myself hoping that our paths may cross once more."
+  - Pray pardon my weary countenance this day. /p Sleep hath eluded me of late, and
+    my thoughts are beset by visions of scorched bread and the gentle, blue eyes
+    of the young maiden. /p I sought counsel from mine physician, who did surmise
+    that I suffer from what mortals call a crush. /p I remain uncertain how I ought
+    to regard such an affliction.
+  - "I\u2026 I daresay my spirits are lighter this day. /p It astonisheth me that
+    thou hast perceived it, for I had thought my heart well hidden. /p Indeed, I
+    have spoken oft with Mistress Saph, the lady of the bread, and she bringeth unto
+    my days a peace I scarce believed I could feel. /p Yet I am ever longing for
+    her presence when she is gone. /p I have made known to my father that I have
+    found one who stirreth my heart, and thus he hath ceased his insistence upon
+    further councils. /p Who can tell? Mayhap in days to come, my realm shall be
+    graced by the reign of two queens."

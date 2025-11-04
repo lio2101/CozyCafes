@@ -35,6 +35,7 @@ public class Beverage : MonoBehaviour
     {
         if (ActiveDrink == this)
             ActiveDrink = null;
+        CharacterManager.Instance.ToggleButton(false);
     }
 
     public void SelectRoast(RoastType roast) { newDrink.Roast = roast; TryGetFull(); }
@@ -63,7 +64,7 @@ public class Beverage : MonoBehaviour
 
         if (newDrink.HasType)
         {
-            Debug.Log("Adding flavor");
+            Debug.Log("Adding flavor:" + flavor.ToString());
             newDrink.Flavor = flavor;
             TryGetFull();
             flavorImg.color = new Color(1, 1, 1, 1);

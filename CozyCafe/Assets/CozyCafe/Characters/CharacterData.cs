@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,9 +15,8 @@ public enum ExpressionType
 public enum GreetingType
 {
     FirstGreeting,
-    GreetingLowSym,
-    Greeting,MedSym,
-    GreetingHighSym,
+    NormalGreeting,
+    FriendGreeting
 }
 
 public enum OrderType
@@ -23,7 +24,7 @@ public enum OrderType
     FirstOrder,
     OrderWithHint,
     LastCorrect,
-    LastTwoCorrect
+    Regular
 }
 
 public enum FeedbackType
@@ -77,8 +78,15 @@ public class CharacterData : ScriptableObject
 {
     // Fields
     [Header("Info")]
+    [TextArea(2, 10)][SerializeField] private string notes;
+
     [SerializeField] private string charName;
     [SerializeField] private BeverageData favoriteDrink;
+
+    [Header("Stats (READ ONLY)")]
+    [SerializeField] private int storyprogress = 0;
+    [SerializeField] private int visitAmount = 0;
+    [SerializeField] private int correctAmount = 0;
 
     [Header("Sprites")]
     [SerializeField] private List<Expression> expressions = new();
@@ -88,14 +96,10 @@ public class CharacterData : ScriptableObject
     [SerializeField] private List<Order> orders = new();
     [SerializeField] private List<Feedback> feedbacks = new();
     [SerializeField] private string goodbye;
-    [SerializeField] private string[] story = new string[5];
+    [TextArea(5, 10)][SerializeField] private string[] story = new string[5];
 
-    private int storyprogress = 0;
 
-    private bool isReturning = false;
-    private bool wasCorrect = false;
-    private bool wasCorrectAgain = false;
-    private bool isCorrect = false;
+    private bool lastCorrect;
 
 
     // Properties
@@ -110,13 +114,9 @@ public class CharacterData : ScriptableObject
     public string[] Story => story;
 
     public int StoryProgress {  get { return storyprogress; } set {  storyprogress = value; } }
-
-    public bool IsReturning { get { return isReturning; } set { isReturning = value; } }
-    public bool WasCorrect { get {  return wasCorrect; } set {  wasCorrect = value; } }
-    public bool WasCorrectAgain { get { return  wasCorrectAgain; } set { wasCorrectAgain = value; } }
-
-    public bool IsCorrect { get { return isCorrect; } set { isCorrect = value; } }
-
+    public int VisitAmount { get { return visitAmount; } set { visitAmount = value; } }
+    public int CorrectAmount { get { return correctAmount; } set { correctAmount = value; } }
+    public bool LastCorrect { get { return lastCorrect; } set { lastCorrect = value; } }
 
     // First story part on the third visit
     // Second story part on the fifth visit > greeting goes to mid sym

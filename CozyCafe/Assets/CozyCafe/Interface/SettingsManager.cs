@@ -13,7 +13,7 @@ public class SettingsManager : MonoBehaviour
     private const float MAX_VOLUME = 0f;
 
     private const float MIN_VOLUME_SLIDER_VALUE = 0f;
-    private const float MAX_VOLUME_SLIDER_VALUE = 100f;
+    private const float MAX_VOLUME_SLIDER_VALUE = 10f;
 
     public static readonly FullScreenMode[] SUPPORTED_WINDOW_MODES = new FullScreenMode[]
     {
@@ -29,7 +29,7 @@ public class SettingsManager : MonoBehaviour
             "Window",
     };
 
-    private const string FILE_NAME = "settings.json";
+    //private const string FILE_NAME = "settings.json";
 
     private Settings settings;
 
@@ -37,7 +37,7 @@ public class SettingsManager : MonoBehaviour
     public static SettingsManager Instance { get; private set; }
     public static Settings Settings => Instance != null ? Instance.settings : null;
     public Resolution[] AvailableResolutions { get { return availableResolutions; } }
-    private string SettingsPath => Path.Combine(Application.persistentDataPath, FILE_NAME);
+    //private string SettingsPath => Path.Combine(Application.persistentDataPath, FILE_NAME);
 
     private Resolution preSaveRes;
     private FullScreenMode preSaveMode;
@@ -54,44 +54,14 @@ public class SettingsManager : MonoBehaviour
         Instance = this;
 
         availableResolutions = Screen.resolutions;
-        LoadSettings();
-        ApplySettings();
-    }
-
-    private void Start()
-    {
-    }
-
-    public void LoadSettings()
-    {
-        if (File.Exists(SettingsPath))
-        {
-            string json = File.ReadAllText(SettingsPath);
-            settings = JsonUtility.FromJson<Settings>(json);
-        }
-        else
-        {
-            settings = Settings.CreateDefault();
-            SaveSettings();
-        }
-    }
-
-    public void SaveSettings()
-    {
-        if (settings == null)
-        {
-            Debug.LogError($"Cant save NULL");
-            return;
-        }
-        //try catch error
-        string json = JsonUtility.ToJson(settings, true);
-        File.WriteAllText(SettingsPath, json);
+        //LoadSettings();
+        //ApplySettings();
     }
 
     public void ApplySettings()
     {
         ApplyVideoSettings();
-        ApplyAudioSettings();
+        //ApplyAudioSettings();
     }
 
     public void SetNewResolution(int newValue)
@@ -108,59 +78,82 @@ public class SettingsManager : MonoBehaviour
 
     internal void SetMasterVolume(float newValue)
     {
-        settings.masterVolume = (int)newValue;
-        ApplyAudioSettings();
+        //settings.masterVolume = (int)newValue;
+        //ApplyAudioSettings();
+        SetVolume("MasterVolume", newValue);
     }
 
     internal void SetMusicVolume(float newValue)
     {
-        settings.musicVolume = (int)newValue;
-        ApplyAudioSettings();
+        SetVolume("MusicVolume", newValue);
+        //settings.musicVolume = (int)newValue;
+        //ApplyAudioSettings();
     }
 
     internal void SetEffectVolume(float newValue)
     {
-        settings.sfxVolume = (int)newValue;
-        ApplyAudioSettings();
-    }
-
-    internal void SetBabbleBool(bool newValue)
-    {
-        settings.babble = newValue;
-        ApplyAudioSettings();
+        SetVolume("SfxVolume", newValue);
+        //settings.sfxVolume = (int)newValue;
+        //ApplyAudioSettings();
     }
 
     public void ApplyVideoSettings()
     {
-        if (preSaveRes.width > 0 && preSaveRes.height > 0f)
-        {
-            settings.resolutionX = preSaveRes.width;
-            settings.resolutionY = preSaveRes.height;
-        }
+        //if (preSaveRes.width > 0 && preSaveRes.height > 0f)
+        //{
+        //    settings.resolutionX = preSaveRes.width;
+        //    settings.resolutionY = preSaveRes.height;
+        //}
 
-        settings.fullScreenMode = preSaveMode;
+        //settings.fullScreenMode = preSaveMode;
         //Debug.Log($"Set Screen Setting to {preSaveMode}");
 
-        Screen.SetResolution(settings.resolutionX, settings.resolutionY, settings.fullScreenMode, settings.RefreshRate);
+        //Screen.SetResolution(settings.resolutionX, settings.resolutionY, settings.fullScreenMode, settings.RefreshRate);
     }
 
 
     // --- Protected/Private Methods ----------------------------------------------------------------------------------        
 
-    private void ApplyAudioSettings()
-    {
-        //SetVolume("MasterVolume", settings.masterVolume);
-        //SetVolume("MusicVolume", settings.musicVolume);
-        //SetVolume("SfxVolume", settings.sfxVolume);
-        //SetVolume("Babble", settings.babble ? settings.sfxVolume : 0);
-    }
 
     private void SetVolume(string parameter, float value)
     {
         float t = Mathf.InverseLerp(MIN_VOLUME_SLIDER_VALUE, MAX_VOLUME_SLIDER_VALUE, value);
         float newVolume = Mathf.Lerp(MIN_VOLUME, MAX_VOLUME, t);
-        mixer.SetFloat(parameter, newVolume);
+        mixer.SetFloat(parameter, newVolume * 0.5f);
     }
+
+    //private void ApplyAudioSettings()
+    //{
+    //    SetVolume("MasterVolume", settings.masterVolume);
+    //    SetVolume("MusicVolume", settings.musicVolume);
+    //    SetVolume("SfxVolume", settings.sfxVolume);
+    //}
+
+    //public void LoadSettings()
+    //{
+    //    if (File.Exists(SettingsPath))
+    //    {
+    //        string json = File.ReadAllText(SettingsPath);
+    //        settings = JsonUtility.FromJson<Settings>(json);
+    //    }
+    //    else
+    //    {
+    //        settings = Settings.CreateDefault();
+    //        SaveSettings();
+    //    }
+    //}
+
+    //public void SaveSettings()
+    //{
+    //    if (settings == null)
+    //    {
+    //        Debug.LogError($"Cant save NULL");
+    //        return;
+    //    }
+    //    //try catch error
+    //    string json = JsonUtility.ToJson(settings, true);
+    //    File.WriteAllText(SettingsPath, json);
+    //}
 
 
 }

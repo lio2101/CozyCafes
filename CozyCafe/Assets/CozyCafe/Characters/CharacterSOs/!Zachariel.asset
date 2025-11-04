@@ -1,0 +1,91 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2d2898401ec342499cc7c0c9ef95607, type: 3}
+  m_Name: '!Zachariel'
+  m_EditorClassIdentifier: 
+  notes: Zachariel
+  charName: Zachariel
+  favoriteDrink:
+    type: 0
+    amount: 0
+    flavor: 0
+  storyprogress: 0
+  visitAmount: 1
+  correctAmount: 0
+  expressions:
+  - type: 0
+    sprite: {fileID: -4210603279101473682, guid: 2b3c4bcf37f49734fb0a6429ab1174a8, type: 3}
+  - type: 1
+    sprite: {fileID: 176360674088776903, guid: 500b7ef8f512815479c4009d7af15428, type: 3}
+  - type: 2
+    sprite: {fileID: -4929393556848980926, guid: a2145d49a68bcae4aa4eff1466e5cd5e, type: 3}
+  greetings:
+  - type: 0
+    text: Greetings. A magic drink sounds exactly like something I could use today.
+  - type: 1
+    text: Greetings, friend. I don't have much time today, sorry.
+  - type: 2
+    text: Greetings [player]. I can always spare a few minutes in my day to see you.
+  - type: 4
+    text: Hi. We are best friends.
+  orders:
+  - type: 0
+    text: I desperately need energy today. Can you make something quick?
+  - type: 1
+    text: A strong drink please. No extras.
+  - type: 2
+    text: I'll take the same as last time.
+  - type: 3
+    text: 'The usual please. '
+  feedbacks:
+  - type: 0
+    text: Ah, this hits the spot. Thanks.
+  - type: 1
+    text: Thanks, friend. You're a lifesaver.
+  - type: 2
+    text: /
+  - type: 3
+    text: '... /p I still feel tired. It''s okay. '
+  - type: 4
+    text: /
+  - type: 5
+    text: '... /p Please, no milk. I am not a child. '
+  - type: 6
+    text: ... /p Please, no [flavor]. I can't have it mess up my system.
+  - type: 7
+    text: /
+  goodbye: I gotta go, thanks for your time.
+  story:
+  - '... /p It looks like my appointment got canceled. /p ... /p I am not used to
+    having free time. If I am not at work, I am taking care of my siblings. /p They
+    are still young, they shouldn''t have to worry about things like money. /p ...
+    /p Oh, I''m getting a call from work. '
+  - "... /p I got up a bit earlier today so I could stop by again. I guess it\u2019s
+    almost part of my routine now, haha. /p It\u2019s strange. being here makes time
+    feel slower. /p Maybe that\u2019s why I like it. /p When I sit here, it\u2019s
+    like the world doesn\u2019t need me for a moment. /p ... /p It\u2019s nice. Uncomfortable,
+    but nice. /p Oh no, I almost forgot the time again. You should really install
+    a clock in this place... or maybe not."
+  - "... /p My coworker told me I don\u2019t always have to be the strong one. /p
+    I brushed it off at first, old habits, I guess. /p But yesterday, when the deadlines
+    piled up, I actually asked her to take one of my shifts. /p She said yes. Just
+    like that. /p The world didn\u2019t collapse, and no one thought less of me.
+    /p It felt strange, almost too easy, but also like breathing out after holding
+    it in for too long haha. /p Maybe strength isn\u2019t about carrying everything
+    alone after all. /p Perhaps I will offer this drink to her instead, as a thank
+    you."
+  - "... /p I asked my neighbor to watch the kids tonight. /p They were thrilled,
+    apparently she makes better hot chocolate than I do haha. /p For the first time
+    in weeks, I came here without rushing, without excuses. /p I used to think I
+    needed to keep everyone safe by never resting, never stopping. /p But maybe taking
+    care of myself is part of that, too. /p The world still spins, the house still
+    stands, and I\u2019m still here... /p ... /p I cannot thank you enough, [player]."

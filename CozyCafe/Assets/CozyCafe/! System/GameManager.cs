@@ -1,5 +1,8 @@
+using System;
+using System.Collections;
 using System.ComponentModel;
 using UnityEngine;
+using UnityEngine.UI;
 
 [DefaultExecutionOrder(-5)]
 public class GameManager : MonoBehaviour
@@ -9,11 +12,19 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private string playerName;
     [SerializeField] private AudioClip backGroundMusic;
+    [SerializeField] private AudioClip nightMusic;
+    [SerializeField] private AudioClip menuMusic;
+
+
+    [SerializeField] private SceneManager sm;
+    [SerializeField] private Button newDaybutton;
+
 
     [Header("Components")]
     [SerializeField] private MenuManager menuManager;
 
     private AudioSource audioSource;
+    private float musicFadeTime = 3.0f;
 
     //Properties
     public static GameManager Instance { get; private set; }
@@ -36,27 +47,38 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        audioSource.clip = backGroundMusic;
+        audioSource.clip = menuMusic;
         audioSource.loop = true;
         audioSource.Play();
 
-        if(skipIntro) { menuManager.SkipIntro(); }
+        newDaybutton.onClick.AddListener(StartNewDay);
+        newDaybutton.gameObject.SetActive(false);
+
+        if (skipIntro) { menuManager.SkipIntro(); }
         else { menuManager.StartMainMenu(); }
     }
 
     public void StartGame()
     {
+        newDaybutton.gameObject.SetActive(false);
+        sm.Togglebutton(true);
         NewTimeWindow();
+        CharacterManager.Instance.NewGame();
         CharacterManager.Instance.NewCharacter();
+    }
+
+    public void StartNewDay()
+    {
+        newDaybutton.gameObject.SetActive(false);
+        CharacterManager.Instance.ResetDay();
+        StartCoroutine(DayRoutine());
     }
 
     public void FinishDay()
     {
-        NextTimeWindowEvent.Invoke(); //to night
-        
-
         Debug.Log("Day finished");
-
+        NextTimeWindowEvent.Invoke(); //to night
+        StartCoroutine(NightRoutine());
         //Change
     }
 
@@ -78,26 +100,82 @@ public class GameManager : MonoBehaviour
         playerName = name;
     }
 
-
-    // to do next: 
-    // full day cycle
-    // sprite outline on mouse enter?
-    // sound effects
-
-    // to do at some point:
-    //char on sprite change jump
-    // book for notes
-    // game paused animation
-    // trinket for completing story
+    public void FadeIntroMusic()
+    {
+        StartCoroutine(FadeRoutine(backGroundMusic));
+    }
 
 
+    private IEnumerator NightRoutine()
+    {
+        yield return StartCoroutine(FadeRoutine(nightMusic));
+        // do after
+        sm.Togglebutton(false);
+        newDaybutton.gameObject.SetActive(true);
+    }
 
-    // if time
-    // fix settings
-    // save file when day ends
-    // pixel effects?
-    // interactable story? multiple choice? happy ending?
+    private IEnumerator DayRoutine()
+    {
+        yield return StartCoroutine(FadeRoutine(backGroundMusic));
+        // do after
+        NewTimeWindow();
+        sm.Togglebutton(true);
+        CharacterManager.Instance.ResetDay();
+        CharacterManager.Instance.NewCharacter();
+    }
 
+    private IEnumerator FadeRoutine(AudioClip to)
+    {
+        Debug.Log("lowering music");
+        float startVolume = audioSource.volume;
+
+        while (audioSource.volume > 0)
+        {
+            audioSource.volume -= startVolume * Time.deltaTime / musicFadeTime;
+            yield return null;
+        }
+
+        audioSource.Stop();
+        Debug.Log("stopping music");
+
+        yield return new WaitForSeconds(0.5f);
+        audioSource.clip = to;
+        audioSource.Play();
+
+        while (audioSource.volume < startVolume)
+        {
+            audioSource.volume += startVolume * Time.deltaTime / musicFadeTime;
+            yield return null;
+        }
+
+        audioSource.volume = startVolume;
+        Debug.Log("finished music");
+
+    }
 
     // scripts : ExtraClasses FadeIn() FadeOut()
+
+    public void FadeOut(Image img)
+    {
+        StartCoroutine(FadeOutRoutine(img));
+    }
+
+    public IEnumerator FadeOutRoutine(Image img, float fadeDuration = 1f)
+    {
+        Color startColor = img.color;
+        Color endColor = startColor;
+        endColor.a = 0;
+
+        float elapsedTime = 0;
+
+        while (elapsedTime < fadeDuration)
+        {
+            float t = elapsedTime / fadeDuration;
+            img.color = Color.Lerp(startColor, endColor, t);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        img.color = new Color(1, 1, 1, 0);
+    }
 }

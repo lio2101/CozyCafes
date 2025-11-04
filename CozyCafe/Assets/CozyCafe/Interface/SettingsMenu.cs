@@ -12,7 +12,6 @@ public class SettingsMenu : MonoBehaviour
     [SerializeField] private Slider masterVolume;
     [SerializeField] private Slider musicVolume;
     [SerializeField] private Slider effectVolume;
-    [SerializeField] private Toggle babbleToggle;
 
     [SerializeField] private Button saveSettings;
 
@@ -24,20 +23,18 @@ public class SettingsMenu : MonoBehaviour
         //fill screen setting options
         screenSettings.SetOptions(SettingsManager.WINDOW_MODE_NAMES);
 
-        //fill resolution options
-
-        //List<string> resolutionList = new List<string>();
-        //foreach (Resolution resolution in SettingsManager.Instance.AvailableResolutions)
-        //{
-        //    resolutionList.Add($"{resolution.width}x{resolution.height}");
-        //}
-        //resolutions.SetOptions(resolutionList);
+        List<string> resolutionList = new List<string>();
+        foreach (Resolution resolution in SettingsManager.Instance.AvailableResolutions)
+        {
+            resolutionList.Add($"{resolution.width}x{resolution.height}");
+        }
+        resolutions.SetOptions(resolutionList);
 
     }
 
     private void OnEnable()
     {
-        saveSettings.onClick.AddListener(SettingsManager.Instance.ApplySettings);
+        //saveSettings.onClick.AddListener(SettingsManager.Instance.ApplySettings);
         EventSystem.current.SetSelectedGameObject(resolutions.gameObject);
 
         // Load current settings into the UI
@@ -49,10 +46,13 @@ public class SettingsMenu : MonoBehaviour
             int screenModeIndex = Array.IndexOf(SettingsManager.SUPPORTED_WINDOW_MODES, SettingsManager.Settings.fullScreenMode);
             screenSettings.SetValue(screenModeIndex);
 
-            masterVolume.value = SettingsManager.Settings.masterVolume;
-            musicVolume.value = SettingsManager.Settings.musicVolume;
-            effectVolume.value = SettingsManager.Settings.sfxVolume;
-            babbleToggle.isOn = SettingsManager.Settings.babble;
+            //masterVolume.value = SettingsManager.Settings.masterVolume;
+            //musicVolume.value = SettingsManager.Settings.musicVolume;
+            //effectVolume.value = SettingsManager.Settings.sfxVolume;
+
+            masterVolume.value = 7;
+            musicVolume.value = 7;
+            effectVolume.value = 7;
         }
 
         resolutions.ValueChanged += SettingsManager.Instance.SetNewResolution;
@@ -61,8 +61,6 @@ public class SettingsMenu : MonoBehaviour
         masterVolume.onValueChanged.AddListener(SettingsManager.Instance.SetMasterVolume);
         musicVolume.onValueChanged.AddListener(SettingsManager.Instance.SetMusicVolume);
         effectVolume.onValueChanged.AddListener(SettingsManager.Instance.SetEffectVolume);
-
-        babbleToggle.onValueChanged.AddListener(SettingsManager.Instance.SetBabbleBool);
     }
     private void OnDisable()
     {
@@ -75,9 +73,8 @@ public class SettingsMenu : MonoBehaviour
         musicVolume.onValueChanged.RemoveListener(SettingsManager.Instance.SetMusicVolume);
         effectVolume.onValueChanged.RemoveListener(SettingsManager.Instance.SetEffectVolume);
 
-        babbleToggle.onValueChanged.RemoveListener(SettingsManager.Instance.SetBabbleBool);
-
-        SettingsManager.Instance.SaveSettings();
+        SettingsManager.Instance.ApplySettings();
+        //SettingsManager.Instance.SaveSettings();
     }
 
 

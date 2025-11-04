@@ -1,0 +1,103 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2d2898401ec342499cc7c0c9ef95607, type: 3}
+  m_Name: '!Willow'
+  m_EditorClassIdentifier: 
+  notes: 'Quirky, extroverted, gets distracted, memory problems. easily excited.
+    gets bullied in class but brushes it off. '
+  charName: Willow
+  favoriteDrink:
+    type: 2
+    amount: 1
+    flavor: 2
+  storyprogress: 0
+  visitAmount: 0
+  correctAmount: 0
+  expressions:
+  - type: 0
+    sprite: {fileID: 8736245726431084429, guid: bdd75d6f92bf5e44096e2b7fc7d4ad40, type: 3}
+  - type: 1
+    sprite: {fileID: 4413357381803317139, guid: ecd839c1c1fe0994786771aa577e2081, type: 3}
+  - type: 2
+    sprite: {fileID: 8736245726431084429, guid: bdd75d6f92bf5e44096e2b7fc7d4ad40, type: 3}
+  greetings:
+  - type: 0
+    text: Hello! I'm Willow nice to meet you! /p This place smells AMAZING. What
+      do you do here?? /p My college is around just a few blocks away so I had to
+      come by to say hi! /p ... /p I'm Willow! Nice to meet you! /p Wait I already
+      said that right?
+  - type: 1
+    text: 'Hi! I''m Willow! Do you work here? Wait no I remember you! Sorry, sorry. '
+  - type: 2
+    text: Oh my god [player]! I haven't seen you in so long!
+  orders:
+  - type: 0
+    text: I really really love chocolate. Do you have anything like that? Pretty
+      please!
+  - type: 1
+    text: I'm not sure if I told you but I really like chocolate! Can you make something
+      with that?
+  - type: 2
+    text: I'm not sure if I told you but I really like chocolate! Can you make something
+      with that?
+  - type: 3
+    text: Please make that drink for me that i like! I forgot what it was.
+  feedbacks:
+  - type: 0
+    text: Mmmh! This has to be the best drink I ever had! You have to tell me your
+      secret some time.
+  - type: 1
+    text: Mmmh! This has to be the best drink I ever had! You have to tell me your
+      secret some time.
+  - type: 2
+    text: I can feel the caffeine down to my fingertips! Oh wow, I don't think I
+      will be able to sleep tonight. /p I always wanted to do an allnighter hihihi.
+  - type: 3
+    text: This drink feels like it will put me right to sleep. No that's a good thing!
+      /p People say I can be a bit too hyper sometimes haha.
+  - type: 4
+    text: 'I like how little milk you put in this! It brings out the flavor more.
+      /p You''re so smart! '
+  - type: 5
+    text: 'Thats a LOT of milk! Good thing I like milk! '
+  - type: 6
+    text: 'Oh wow I love this flavor! It''s not chocolate but still great! '
+  - type: 7
+    text: 
+  goodbye: Have a nice day! Bye bye!
+  story:
+  - 'I should probably introduce myself! My name is Willow! /p ... /p Oh no I''m
+    doing it again aren''t I? I''m sorry haha. /p I have some memory problems. Sometimes
+    I notice it but a lot of the times I don''t... /p I hope you don''t mind. /p
+    A lot of my classmates hate it. /p They say it''s annoying. /p But as long as
+    I''m kind and stay positive things will be okay! /p ... /p Sorry I zoned out.
+    /p What was I saying? /p Not important! '
+  - "College was fun this week! /p \u2026 /p Sometimes I forget what my assignments
+    are\u2026 or even the names of my teachers. /p That\u2019s a little embarrassing,
+    haha. /p But everyone\u2019s busy with their own stuff anyway, right? /p I just
+    try to do my best and\u2026 /p Oh, I think I forgot what I was saying. /p Not
+    important! /p College was fun this week! /p I meet people, we laugh\u2026 /p
+    And sometimes I learn things. /p That\u2019s what counts, isn\u2019t it?"
+  - "I woke up today and had a super weird feeling\u2026 /p Like I\u2019m supposed
+    to be somewhere. /p I can\u2019t remember where\u2026 /p But it must not be that
+    important, right? /p I ended up just staying in my room for a while. /p Then
+    I wandered around a little bit and ended up here! /p I feel a little silly sometimes,
+    but\u2026 /p Life is full of little adventures, aren\u2019t they? /p And I always
+    try to smile. /p That helps."
+  - "My name is Willow by the way! What's yours? /p ...  /p Something super funny
+    happened to me yesterday. /p My house just disappeared! It wasn't where it was
+    before. And I walked and walked\u2026 /p And then, well\u2026 /p I ended up sleeping
+    on a park bench. /p It wasn\u2019t scary, really\u2026 /p I think. /p A neighbor
+    found me, though! /p He brought me home, which was really nice of him. /p Now
+    he takes care of me. /p He's a social worker or something? That sounds like a
+    fun job. I'm not sure what it means tho. /p He's waiting outside so we can walk
+    back home, so I better get going!"

@@ -43,7 +43,15 @@ AudioMixerController:
   m_SuspendThreshold: -80
   m_EnableSuspend: 1
   m_UpdateMode: 0
-  m_ExposedParameters: []
+  m_ExposedParameters:
+  - guid: e3ecb407ba167764cb5490a2727e4621
+    name: Babble
+  - guid: d7dca444285b00a42be80a007eec0313
+    name: MasterVolume
+  - guid: e1ad27556c5cadb4596c915ae1ff802c
+    name: MusicVolume
+  - guid: 2ad68cc235967f242acbc0f7daed8b04
+    name: SfxVolume
   m_AudioMixerGroupViews:
   - guids:
     - cb5ffd3566a835542bf72875f3eeca88
@@ -70,7 +78,7 @@ AudioMixerGroupController:
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: 24400004}
-  m_UserColorIndex: 0
+  m_UserColorIndex: 3
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
@@ -98,8 +106,8 @@ AudioMixerSnapshotController:
   m_AudioMixer: {fileID: 24100000}
   m_SnapshotID: df70b8f015babca409cc5d7eb11c22fe
   m_FloatValues:
-    e1ad27556c5cadb4596c915ae1ff802c: -6.133707
-    e3ecb407ba167764cb5490a2727e4621: -5.3230715
+    e1ad27556c5cadb4596c915ae1ff802c: -5.145858e-11
+    e3ecb407ba167764cb5490a2727e4621: 0.04171297
   m_TransitionOverrides: {}
 --- !u!244 &2038624954486955283
 AudioMixerEffectController:
@@ -131,7 +139,7 @@ AudioMixerGroupController:
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: -230284150466085886}
-  m_UserColorIndex: 0
+  m_UserColorIndex: 6
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
@@ -150,8 +158,8 @@ AudioMixerGroupController:
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: -2292498267928099238}
-  m_UserColorIndex: 0
-  m_Mute: 1
+  m_UserColorIndex: 5
+  m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
 --- !u!243 &6761096199871024952
@@ -169,7 +177,7 @@ AudioMixerGroupController:
   m_Send: 00000000000000000000000000000000
   m_Effects:
   - {fileID: 2038624954486955283}
-  m_UserColorIndex: 0
+  m_UserColorIndex: 8
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0

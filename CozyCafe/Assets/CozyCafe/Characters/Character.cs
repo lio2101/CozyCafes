@@ -1,18 +1,13 @@
 using System.Collections;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using NUnit.Framework;
 using System.Collections.Generic;
 using Unity.VisualScripting;
-using System;
 
 public class Character : MonoBehaviour
 {
-    private int sympathy;
-
     private Image currentSprite;
     private CharacterData data;
 
@@ -50,23 +45,33 @@ public class Character : MonoBehaviour
 
         if (!hasOrdered)
         {
+            Debug.Log("Visit: " + data.VisitAmount);
             //Greeting and Order
-            data.IsReturning = false;
-            if (data.IsReturning)
+            if (data.VisitAmount > 0)
             {
-                //Not first Visit
+                //Not first Visit > calc friends
+                if (data.VisitAmount > 3 & data.CorrectAmount > 1)
+                    newConvo.Add(GetLine(GreetingType.FriendGreeting));
+                else
+                    newConvo.Add(GetLine(GreetingType.NormalGreeting));
 
-                //calc sympathy
-                newConvo.Add(GetLine(GreetingType.GreetingLowSym));
-                newConvo.Add(GetLine(OrderType.OrderWithHint));
+                //Order calc
+                if (data.LastCorrect)
+                    if (data.CorrectAmount > 3)
+                        newConvo.Add(GetLine(OrderType.Regular));
+                    else
+                        newConvo.Add(GetLine(OrderType.LastCorrect));
+
+                else
+                    newConvo.Add(GetLine(OrderType.OrderWithHint));
             }
             else
             {
                 //First Visit
                 newConvo.Add(GetLine(GreetingType.FirstGreeting));
                 newConvo.Add(GetLine(OrderType.FirstOrder));
-                data.IsReturning = true;
             }
+            data.VisitAmount++;
         }
         else
         {
@@ -86,21 +91,22 @@ public class Character : MonoBehaviour
             }
             if (charDrink.Milk < givenDrink.Milk)
             {
-                feedbackRoul.Add(GetLine(FeedbackType.TooLittleMilk));
+                feedbackRoul.Add(GetLine(FeedbackType.TooMuchMilk));
             }
             if (charDrink.Milk > givenDrink.Milk)
             {
-                feedbackRoul.Add(GetLine(FeedbackType.TooMuchMilk));
+                feedbackRoul.Add(GetLine(FeedbackType.TooLittleMilk));
             }
 
             if (charDrink.Flavor != givenDrink.Flavor)
             {
+                Debug.Log(charDrink.Flavor + " " + givenDrink.Flavor);
                 string str;
                 if (givenDrink.Flavor == 0)
                     str = GetLine(FeedbackType.NoFlavor);
 
                 else
-                    str = GetLine(FeedbackType.WrongFlavor).Replace("[flavor]", charDrink.Flavor.ToString());
+                    str = GetLine(FeedbackType.WrongFlavor).Replace("[flavor]", givenDrink.Flavor.ToString());
 
                 feedbackRoul.Add(str);
             }
@@ -109,13 +115,37 @@ public class Character : MonoBehaviour
             {
                 string feedback = feedbackRoul[UnityEngine.Random.Range(0, feedbackRoul.Count)];
                 newConvo.Add(feedback);
+                data.LastCorrect = false;
+
+                //foreach (string str in feedbackRoul)
+                //{
+                //    Debug.Log(str);
+                //}
             }
 
-            else if(feedbackRoul.Count == 0)
+            else
             {
-                //AllCorrect this dont work
-                newConvo.Add(GetLine(FeedbackType.CorrectDrink));
+                //AllCorrect
+                if (data.LastCorrect)
+                    newConvo.Add(GetLine(FeedbackType.CorrectAgain));
+                else
+                    newConvo.Add(GetLine(FeedbackType.CorrectDrink));
+
+                data.LastCorrect = true;
+                data.CorrectAmount++;
             }
+
+            //Story
+            if (
+                (data.VisitAmount == 3) ||
+                (data.VisitAmount > 3 && data.CorrectAmount > 0) ||
+                (data.VisitAmount > 4 && data.CorrectAmount > 3) ||
+                (data.VisitAmount > 3 && data.CorrectAmount > 4)
+                )
+            {
+                newConvo.Add(GetStory());
+            }
+
             //End
             newConvo.Add(GetGoodbye());
             drinkReceived = true;
@@ -127,6 +157,11 @@ public class Character : MonoBehaviour
     public void ChangeExpression(ExpressionType type)
     {
         currentSprite.sprite = data.Expressions.Where(i => i.Type == type).Select(i => i.Sprite).FirstOrDefault();
+    }
+
+    public void Jump()
+    {
+        StartCoroutine(SpriteJumpRoutine());
     }
     // Private
 
@@ -145,15 +180,57 @@ public class Character : MonoBehaviour
         return data.Feedbacks.Where(i => i.Type == type).Select(i => i.Text).FirstOrDefault();
     }
 
+    private string GetStory()
+    {
+        Debug.Log("adding story part " + data.StoryProgress);
+        string s = data.Story[data.StoryProgress];
+        data.StoryProgress++;
+        return s;
+    }
+
     private string GetGoodbye()
     {
         return data.Goodbye;
     }
 
+    private IEnumerator SpriteJumpRoutine()
+    {
+        float jumpDuration = 0.3f;
+        int jumpHeight = 15;
+
+        RectTransform rect = GetComponent<RectTransform>();
+        Vector3 startPos = rect.localPosition;
+
+        float elapsedTime = 0;
+        while (elapsedTime < jumpDuration / 2f)
+        {
+            float t = elapsedTime / (jumpDuration / 2f);
+            float newY = Mathf.Lerp(startPos.y, startPos.y + jumpHeight, t);
+            rect.localPosition = new Vector3(startPos.x, newY, startPos.z);
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        elapsedTime = 0f;
+
+        // Fall down
+        while (elapsedTime < jumpDuration / 2f)
+        {
+            float t = elapsedTime / (jumpDuration / 2f);
+            float newY = Mathf.Lerp(startPos.y + jumpHeight, startPos.y, t);
+            rect.localPosition = new Vector3(startPos.x, newY, startPos.z);
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        rect.localPosition = startPos; // ensure it resets exactly
+    }
+
 
     private IEnumerator SpawnRoutine()
     {
-
         float elapsedTime = 0;
         Color startColor = currentSprite.color;
         startColor.a = 0f;
@@ -161,10 +238,11 @@ public class Character : MonoBehaviour
         endColor.a = 1f;
         currentSprite.color = startColor;
 
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1f);
+
         CharacterManager.Instance.PlaySound();
 
-        yield return new WaitForSeconds(CharacterManager.Instance.TimeBeforeAppear);
+        yield return new WaitForSeconds(3f);
 
         float dur = CharacterManager.Instance.AppearAnimationDuration;
         //Fade in
@@ -204,8 +282,13 @@ public class Character : MonoBehaviour
 
         yield return new WaitForSeconds(1);
 
-        if (!isLast) { CharacterManager.Instance.NewCharacter(); }
-        Destroy(this.gameObject);
-    }
+        if (!isLast)
+        {
+            GameManager.Instance.NewTimeWindow();
 
+            CharacterManager.Instance.NewCharacter();
+            Destroy(this.gameObject);
+        }
+
+    }
 }

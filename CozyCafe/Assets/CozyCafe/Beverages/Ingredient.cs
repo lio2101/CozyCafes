@@ -5,7 +5,6 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using static System.Net.Mime.MediaTypeNames;
 
 
 // Enums
@@ -27,27 +26,20 @@ public class Ingredient : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     [SerializeField] IngredientType ingredientType;
     [SerializeField] AudioClip pickupSound;
     [SerializeField] AudioClip ingredientSound;
-    [TextArea(2, 10)][SerializeField] string ingredientinfo;
     [SerializeField] private bool isPickupable;
     [SerializeField] private int pickupRange = 20;
 
     private Button interactButton;
     private HoverText hover;
     private AudioSource audioSource;
+    private Image img;
 
     void Awake()
     {
         interactButton = GetComponentInChildren<Button>();
         hover = GetComponentInChildren<HoverText>();
         audioSource = GetComponent<AudioSource>();
-    }
-
-    private void Start()
-    {
-        //set text
-        string title = ObjectNames.NicifyVariableName(ingredientType.ToString());
-        string info = ingredientinfo;
-        hover.SetHover(title, info);
+        img = GetComponentInChildren<Image>();
     }
 
     private void OnEnable()
@@ -70,28 +62,15 @@ public class Ingredient : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         switch (ingredientType)
         {
             case IngredientType.LightRoast:
-                if (!Beverage.ActiveDrink.BeverageData.HasType)
-                {
-                    Beverage.ActiveDrink.SelectRoast(RoastType.Light);
-                }
+
                 break;
             case IngredientType.MediumRoast:
-                if (!Beverage.ActiveDrink.BeverageData.HasType)
-                {
-                    Beverage.ActiveDrink.SelectRoast(RoastType.Medium);
-                }
+
                 break;
             case IngredientType.MediumDarkRoast:
-                if (!Beverage.ActiveDrink.BeverageData.HasType)
-                {
-                    Beverage.ActiveDrink.SelectRoast(RoastType.MediumDark);
-                }
+
                 break;
             case IngredientType.DarkRoast:
-                if (!Beverage.ActiveDrink.BeverageData.HasType)
-                {
-                    Beverage.ActiveDrink.SelectRoast(RoastType.Dark);
-                }
                 break;
             case IngredientType.Milk:
                 Beverage.ActiveDrink.AddMilk();
@@ -112,7 +91,7 @@ public class Ingredient : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     public void OnPointerEnter(PointerEventData eventData)
     {
         //pick up
-        this.gameObject.GetComponent<RectTransform>().offsetMin = new Vector2(0, pickupRange);
+        img.GetComponent<RectTransform>().offsetMin = new Vector2(0, pickupRange);
 
         audioSource.clip = pickupSound;
         audioSource.pitch = UnityEngine.Random.Range(0.8f, 1.2f);
@@ -121,7 +100,7 @@ public class Ingredient : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        this.gameObject.GetComponent<RectTransform>().offsetMin = new Vector2(0, 0);
+        img.GetComponent<RectTransform>().offsetMin = new Vector2(0, 0);
         //set down
     }
 }

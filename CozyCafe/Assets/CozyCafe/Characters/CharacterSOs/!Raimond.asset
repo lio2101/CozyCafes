@@ -1,0 +1,88 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2d2898401ec342499cc7c0c9ef95607, type: 3}
+  m_Name: '!Raimond'
+  m_EditorClassIdentifier: 
+  notes: 
+  charName: Raimond
+  favoriteDrink:
+    type: 1
+    amount: 3
+    flavor: 0
+  storyprogress: 0
+  visitAmount: 0
+  correctAmount: 0
+  expressions:
+  - type: 0
+    sprite: {fileID: 8835236539173326690, guid: fe1cdc4c449854f4bada0ef5e13dba99, type: 3}
+  - type: 1
+    sprite: {fileID: -1649735631415879846, guid: ce381cac73557bf43a29f9fd3c338849, type: 3}
+  - type: 2
+    sprite: {fileID: -3056195060167006373, guid: c7bebc6c12719a444b688c43fa83a49a, type: 3}
+  greetings:
+  - type: 0
+    text: 'Good day. /p This place is new right? I haven''t noticed it before. /p '
+  - type: 1
+    text: 'Good day. '
+  - type: 2
+    text: Good to see you again [player].
+  orders:
+  - type: 0
+    text: Your options look ... interesting. But I'll try one. /p Try not to put
+      anything too bitter into it.
+  - type: 1
+    text: One drink if you will. No bitterness added.
+  - type: 2
+    text: I quite enjoyed my drink here last time. I'll take the same once more.
+  - type: 3
+    text: I will have my usual order.
+  feedbacks:
+  - type: 0
+    text: This is quite exquisit. Well done.
+  - type: 1
+    text: 'Excellent. Thank you. '
+  - type: 2
+    text: I am not so fond of this level of acidity. Kindly adjust this next time.
+  - type: 3
+    text: I feel I might be too old to enjoy this level of energy. A little less
+      next time would be appreciated.
+  - type: 4
+    text: This is quite strong. I might add more milk to it if it was up to me. But
+      thank you.
+  - type: 5
+    text: /
+  - type: 6
+    text: I am catching a taste of [flavor]... Not quite my top choice. But thank
+      you.
+  goodbye: Enjoy your day.
+  story:
+  - '... /p Barista ... [player], if I may? If you could spare a minute of your time?
+
+    /p
+    Thank you/p
+
+    I wanted to express my gratitude for this shop. Places like
+    these have gotten rare with time. /p I can''t quite explain it. /p ... /p That
+    is all.'
+  - .../p [player], I must confess, I find myself coming back to this place more
+    often than I plan to. /p I feel, it might be connected to the nostalgia of my
+    old home. Perhaps I should take this as a sign. /p I will have to reflect on
+    this on my own please excuse me.
+  - .../p Regarding our last conversation, I have decided I will be moving back to
+    my old home. /p Your company and this environment has made me realize I do not
+    belong in this crowded city. /p I appreciate you hearing me out. If you'd excuse
+    me now, I have some packing to do.
+  - In more personal matters, I thought I would let you know that I have settled
+    into my new... old... life very well. /p I doubt that this revelation would have
+    been possible without you, [player], I am grateful. /p I will make sure to still
+    pay you a visit from time to time. /pI guess I have grown quite fond of these
+    drinks. And the person serving them.

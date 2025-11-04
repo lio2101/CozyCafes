@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -42,7 +43,8 @@ public class CoffeeMachine : MonoBehaviour
 
         for (int i = 0; i < beans.Length; i++)
         {
-            beans[i].onClick.AddListener(() => SetBeans((RoastType)i + 1));
+            int index = i;
+            beans[i].onClick.AddListener(() => SetBeans((RoastType)index));
         }
     }
 
@@ -67,6 +69,7 @@ public class CoffeeMachine : MonoBehaviour
         hasBeans = true;
         index++;
         thisImage.sprite = statesprites[index];
+        Debug.Log("Adding RoastType : " + type.ToString());
     }
 
     private void OnStart()
@@ -134,6 +137,7 @@ public class CoffeeMachine : MonoBehaviour
 
         startButton.interactable = true;
         removebeansButton.interactable = true;
+        hasBeans = false;
 
         audioSource.clip = machineDone;
         audioSource.Play();

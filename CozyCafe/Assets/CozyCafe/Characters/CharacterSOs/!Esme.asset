@@ -1,0 +1,101 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2d2898401ec342499cc7c0c9ef95607, type: 3}
+  m_Name: '!Esme'
+  m_EditorClassIdentifier: 
+  notes: kind, gentle, aetherial. has chronic pains, feels bad for not being able
+    to work
+  charName: Esme
+  favoriteDrink:
+    type: 2
+    amount: 3
+    flavor: 1
+  storyprogress: 0
+  visitAmount: 1
+  correctAmount: 0
+  expressions:
+  - type: 0
+    sprite: {fileID: -492787555904600777, guid: aba3ac82ce12aa04a829aaebc069f7e6, type: 3}
+  - type: 1
+    sprite: {fileID: 6895015803985679519, guid: 4a01ed88a348b2846ab56e4977581bb9, type: 3}
+  - type: 2
+    sprite: {fileID: -703553564653378453, guid: e2a2118d1e138854886f47d2a4286e60, type: 3}
+  greetings:
+  - type: 0
+    text: 'Hello human. /p I can sense your confusion but worry not, for I am simply
+      resting my eyes. My aetherial vision sees you crystal clear. '
+  - type: 1
+    text: Hello Human. May the light be with you today.
+  - type: 2
+    text: Hello my dear. Your presence shines like a second sun on this day.
+  - type: 4
+    text: Hi. We are best friends.
+  orders:
+  - type: 0
+    text: ' I adore all things sweet, would you happen to have anything of the sort,
+      my dear?'
+  - type: 1
+    text: Please be so kind and make me a sweet drink, will you?
+  - type: 2
+    text: The drink you offered me last time filled my heart with warmth. Would you
+      be able to recreate it?
+  - type: 3
+    text: Be a dear and make me that drink I love so much, please.
+  feedbacks:
+  - type: 0
+    text: By the sun. This flavor. It is like honey poured over tired thoughts. /p
+      I can feel my worries being washed away. Thank you for this.
+  - type: 1
+    text: 'Your drinks never fail to brighten my day. Each sip humming with the weightless
+      ache of comfort. '
+  - type: 2
+    text: The constant hum of energy in this seems to stir my inner peace. /p I am
+      unable to consume this. Thank you regardless. /p Do not be harsh on yourself.
+  - type: 3
+    text: Oh, I can sense the bitternis even from this distance. /p Please, offer
+      this drink to another customer will you? /p But worry not, my patience is endless.
+  - type: 4
+    text: I remember my grandfather liking his tea dark as the night. /p Perhaps
+      this would have been to his liking. I will kindly decline. /p Thank you for
+      your efforts.
+  - type: 5
+    text: /
+  - type: 6
+    text: This sweetness in this seems to be restricted. Perhaps it is because of
+      the [flavor]. We shall find out next time.
+  - type: 7
+    text: I can see the potential in this drink, still waiting to be fulfilled. /p
+      Do not be sad. Mistakes make us learn.
+  goodbye: May light shine upon you, human.
+  story:
+  - ... /p Please excuse my absence recently. You see, my body did not allow me to
+    leave my quarters. /p Chronic weakness has unfortunately always run in my blood
+    line. /p I am thankful to have your shop in close distance. /p Even on days where
+    strength does not come to me easily, at least I get to experience your magic
+    drinks. /p I am a bit out of breath, I think I will sit down for a while before
+    I take my leave.
+  - '... /p Sorry I am feeling a bit weak today. The symptoms are more frequent during
+    this season. /p But I cannot complain. In her last years, my mother was not even
+    able to speak. /p She has been in cryo sleep for 20 years now. Bless her heart.
+    /p I should get back home. Let me just rest my wings for a bit. /p Thank you
+    for listening, dear.  '
+  - ... /p I tried to walk a bit farther today. The air felt heavy at first, but
+    it grew lighter with every step. /p Maybe my strength is not returning. Maybe
+    I am simply learning to move within its limits. /p There is comfort in that,
+    I think. /p I used to resent this frail body, but lately I find myself listening
+    to it instead. /p We all have our own journey to go, and I am grateful for mine
+    nontheless.
+  - ... /p I stopped by not for the drink this time, but for the warmth. /p I have
+    learned that healing is not always a battle to win, sometimes it is a truce to
+    keep. /p The days still tire me, but I no longer measure them by what I cannot
+    do. /p Today I reached the shop. Tomorrow, perhaps, I will sit outside a little
+    longer. /p That will be enough. Thank you [player].

@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2d2898401ec342499cc7c0c9ef95607, type: 3}
+  m_Name: '!Luka'
+  m_EditorClassIdentifier: 
+  notes: 
+  charName: Luka
+  favoriteDrink:
+    type: 3
+    amount: 1
+    flavor: 1
+  storyprogress: 0
+  visitAmount: 0
+  correctAmount: 0
+  expressions:
+  - type: 0
+    sprite: {fileID: 1320481435402747707, guid: 3f09cd0551083b04b904c3bd6fb1812e, type: 3}
+  - type: 1
+    sprite: {fileID: -2895821608431225175, guid: e431e42259075eb43bda1f4672717138, type: 3}
+  - type: 2
+    sprite: {fileID: -4045114995007804087, guid: bdd92e6894cc93f479af42185fea2451, type: 3}
+  greetings:
+  - type: 0
+    text: .../p Sorry I was looking at the menu. /p ...
+  - type: 1
+    text: 'Hello. '
+  - type: 2
+    text: Hello. It's ... good to see you today.
+  orders:
+  - type: 0
+    text: Just, make me anything. It's okay.
+  - type: 1
+    text: One uhm ... drink please. Anything.
+  - type: 2
+    text: I'd ... like to have the same as last time if that's okay.
+  - type: 3
+    text: I'll take ... that one tasty drink you always do.
+  feedbacks:
+  - type: 0
+    text: 'Oh, this ... tastes really nice. /p Thank you, I really like it. '
+  - type: 1
+    text: Thank you [player]. This drink always makes me feel better.
+  - type: 2
+    text: '... /p No it''s okay! I just, can''t handle caffeine that well. /p But
+      I will drink it. Sorry for the troubles. '
+  - type: 3
+    text: /
+  - type: 4
+    text: .../p Thank you.
+  - type: 5
+    text: .../p Thank you.
+  - type: 6
+    text: .../p Thank you.
+  - type: 7
+    text: .../p Thank you.
+  goodbye: ... Goodbye.
+  story:
+  - '.../p To be honest... I only come here because my therapist says I need to have
+    more social interactions. /p The first time I came here, I stood outside for
+    an hour because I was too scared to go Inside. /p Silly, I know./p I don''t even
+    need to hydrate since you know... water folks. /p Anyway... '
+  - ... /p I just wanted to say, I really like your shop and I... don't mind talking
+    to you. /p You're a kind person [player].
+  - ... /p I'm not very good at talking, or standing up for myself. But I think coming
+    here has really helped. /p You know... /p Yesterday someone talked to me in front
+    of your shop. I was scared at frist, /p but it turns out we both enjoy making
+    art. Maybe it's not so bad to share things sometimes.
+  - ... /p I'm meeting up with my new friend today. We talked a bit more. /p I'm
+    a bit nervous but, I think I'm ready to open up more. /p Thank you so much for
+    being patient with me [player].

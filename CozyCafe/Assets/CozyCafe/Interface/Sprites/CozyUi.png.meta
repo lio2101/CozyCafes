@@ -7100,7 +7100,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CozyUi_90
+      name: butsm
       rect:
         serializedVersion: 2
         x: 417
@@ -7122,7 +7122,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CozyUi_91
+      name: butsm1
       rect:
         serializedVersion: 2
         x: 433
@@ -22478,7 +22478,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: CozyUi_789
+      name: color
       rect:
         serializedVersion: 2
         x: 480
@@ -43575,7 +43575,6 @@ TextureImporter:
       CozyUi_786: 5878657110183171750
       CozyUi_787: -4459163292650475976
       CozyUi_788: -1006876772556354499
-      CozyUi_789: 5140488610291404807
       CozyUi_79: -3897335538268547278
       CozyUi_790: 1986082545727003205
       CozyUi_791: 8252667673535435695
@@ -43691,7 +43690,6 @@ TextureImporter:
       CozyUi_898: 7086160859296799424
       CozyUi_899: 6217050771055847676
       CozyUi_9: 5797796534530022605
-      CozyUi_90: -4359579328039167892
       CozyUi_900: 6289371156284408337
       CozyUi_901: 9105717426535724382
       CozyUi_902: -8229626122537310811
@@ -43702,7 +43700,6 @@ TextureImporter:
       CozyUi_907: 7756423215299137027
       CozyUi_908: 4792890953180787883
       CozyUi_909: -5370915618791001715
-      CozyUi_91: -1855288022781998757
       CozyUi_910: 4640941077929441515
       CozyUi_911: 4829458606644180464
       CozyUi_912: -3834954684249741270
@@ -43810,6 +43807,8 @@ TextureImporter:
       bottle1: -8286953830601300661
       bottle2: -5629170728459175821
       bottle3: 2701792583103225416
+      butsm: -4359579328039167892
+      butsm1: -1855288022781998757
       button1a: -1041876738423188207
       button1b: 2707823111249459086
       button2a: -8202988926584874209
@@ -43823,6 +43822,7 @@ TextureImporter:
       coffeecup2: 2075358800787260573
       coffeecup3: 1050173731778200432
       coffeecup4: 4532067359506065263
+      color: 5140488610291404807
       cup: 5156974178257321771
       cursor1: -4398890878776398718
       cursor2: 3609491416174032249

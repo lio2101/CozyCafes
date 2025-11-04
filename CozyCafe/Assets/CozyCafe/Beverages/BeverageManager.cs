@@ -4,22 +4,21 @@ using UnityEngine.UI;
 
 public class BeverageManager : MonoBehaviour
 {
+    [SerializeField] private GameObject createUI;
+
     [SerializeField] private Button createButton;
-    [SerializeField] private Button deleteButton;
     [SerializeField] private GameObject cupPrefab;
 
 
     private void OnEnable()
     {
         createButton.onClick.AddListener(NewBeverage);
-        deleteButton.onClick.AddListener(DeleteBeverage);
         createButton.gameObject.SetActive(false);
     }
 
     private void OnDisable()
     {
         createButton.onClick.RemoveListener(NewBeverage);
-        deleteButton.onClick.RemoveListener(DeleteBeverage);
     }
 
     private void NewBeverage()
@@ -28,7 +27,7 @@ public class BeverageManager : MonoBehaviour
         {
             if (CharacterManager.Instance.HasOrdered)
             {
-                createButton.gameObject.SetActive(false);
+                CreateButton(false);
                 GameObject newbev = Instantiate(cupPrefab, this.transform);
                 newbev.transform.localScale = Vector3.one * 10;
             }
@@ -37,14 +36,13 @@ public class BeverageManager : MonoBehaviour
         else { Debug.Log("Drink already active"); }
     }
 
-    private void DeleteBeverage()
+    public void DeleteBeverage()
     {
         if (Beverage.ActiveDrink != null)
         {
-            deleteButton.GetComponent<AudioSource>().Play();
             Beverage.ActiveDrink.TryGetFull();
             Destroy(Beverage.ActiveDrink.gameObject);
-            createButton.gameObject.SetActive(true);
+            CreateButton(true);
         }
     }
 

@@ -14,7 +14,6 @@ public class Settings
     public int masterVolume;
     public int musicVolume;
     public int sfxVolume;
-    public bool babble;
 
     public Resolution Resolution => new()
     {
@@ -43,7 +42,6 @@ public class Settings
         s.masterVolume = 70;
         s.musicVolume = 70;
         s.sfxVolume = 70;
-        s.babble = true;
 
         return s;
     }

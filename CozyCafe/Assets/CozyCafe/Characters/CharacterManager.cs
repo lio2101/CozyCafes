@@ -58,9 +58,6 @@ public class CharacterManager : MonoBehaviour
         ToggleDialogueWindow(false);
         isConversationActive = false;
 
-        returningCharacters.Clear();
-        ResetDay();
-        beverageManager.CreateButton(true);
     }
 
     void OnEnable()
@@ -75,22 +72,32 @@ public class CharacterManager : MonoBehaviour
         dialogueField.OnDialogue -= SetTalking;
     }
 
+    public void NewGame()
+    {
+        foreach (CharacterData c in characters)
+        {
+            c.StoryProgress = 0;
+            c.VisitAmount = 0;
+            c.CorrectAmount = 0;
+        }
+        returningCharacters.Clear();
+        beverageManager.CreateButton(false);
+        ResetDay();
+    }
+
 
     // Public 
     public void ResetDay()
     {
-        availableCharacters = characters;
+        characterCount = 0;
+        availableCharacters.Clear();
+        availableCharacters.AddRange(characters);
         visitedCharacters.Clear();
         activeCharacter = null;
     }
 
     public void NewCharacter()
     {
-        if(availableCharacters.Count == visitedCharacters.Count)
-        {
-            Debug.Log("All characters visited");
-        }
-
         if (activeCharacter != null)
         {
             Destroy(activeCharacterObj);
@@ -108,18 +115,11 @@ public class CharacterManager : MonoBehaviour
 
             activeCharacter.InitCharacter(availableCharacters[index]);
 
-
             visitedCharacters.Add(availableCharacters[index]);
             returningCharacters.Add(availableCharacters[index]);
-
             availableCharacters.RemoveAt(index);
 
-            // if character is here for the first time, reset story
-            if (!returningCharacters.FirstOrDefault(data => activeCharacter.Data == data))
-            {
-                activeCharacter.Data.StoryProgress = 0;
-                activeCharacter.Data.IsReturning = false;
-            }
+
             activeCharacterObj.name = activeCharacter.Data.Name;
 
             characterCount++;
@@ -129,7 +129,6 @@ public class CharacterManager : MonoBehaviour
 
     public void DeleteCharacter()
     {
-        //add fade out animation here
         bool isLast = characterCount == CHARACTERSPERDAY;
 
         activeCharacter.DestroyCharacter(isLast);
@@ -137,6 +136,7 @@ public class CharacterManager : MonoBehaviour
         if (isLast)
         {
             //Save progress
+            ResetDay();
             GameManager.Instance.FinishDay();
         }
     }
@@ -181,6 +181,7 @@ public class CharacterManager : MonoBehaviour
             ToggleDialogueWindow(true);
             ToggleButton(false);
             dialogueField.SetDialogue(activeCharacter.GetConversation(hasOrdered), true);
+            dialogueField.Setname(activeCharacter.Data.Name);
             hasOrdered = true;
             beverageManager.CreateButton(true);
         }
@@ -200,6 +201,7 @@ public class CharacterManager : MonoBehaviour
                     ToggleDialogueWindow(true);
                     ToggleButton(false);
                     dialogueField.SetDialogue(activeCharacter.GetConversation(hasOrdered), true);
+                    dialogueField.Setname(activeCharacter.Data.Name);
 
                     hasOrdered = false;
                     beverageManager.CreateButton(false);
@@ -214,6 +216,11 @@ public class CharacterManager : MonoBehaviour
     {
         characterAudioSource.clip = doorSound;
         characterAudioSource.Play();
+    }
+
+    public void Jump()
+    {
+        activeCharacter.Jump();
     }
 
     // Private

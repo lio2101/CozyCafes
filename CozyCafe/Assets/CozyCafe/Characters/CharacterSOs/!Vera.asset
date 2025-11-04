@@ -1,0 +1,94 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2d2898401ec342499cc7c0c9ef95607, type: 3}
+  m_Name: '!Vera'
+  m_EditorClassIdentifier: 
+  notes: art studio, ambivert, caffeine helps creativity
+  charName: Vera
+  favoriteDrink:
+    type: 0
+    amount: 0
+    flavor: 3
+  storyprogress: 0
+  visitAmount: 0
+  correctAmount: 0
+  expressions:
+  - type: 0
+    sprite: {fileID: 2451018631221633367, guid: 171f00e983315df40ab9408d87bbe67a, type: 3}
+  - type: 1
+    sprite: {fileID: -6060739831708070957, guid: 6ba262d55753e024481ee15b5f0bb758, type: 3}
+  - type: 2
+    sprite: {fileID: 2451018631221633367, guid: 171f00e983315df40ab9408d87bbe67a, type: 3}
+  greetings:
+  - type: 0
+    text: 'Hello there! I saw this super cute shop opened, and wanted to check it
+      out! '
+  - type: 1
+    text: Hello again! How are you doing today?
+  - type: 3
+    text: Hello [player]! How is your shift going? You look good today.
+  - type: 4
+    text: Hi. We are best friends.
+  orders:
+  - type: 0
+    text: I'm very intrigued by this caffeine effect people are talking about. /p
+      Could you make a drink for me to demonstate that? Thank you!
+  - type: 1
+    text: 'I''ll have one drink with a lot of magic energy please, if you know what
+      I mean. '
+  - type: 2
+    text: The drink last time was amazing! I'll take the same again, please.
+  - type: 3
+    text: My usual order please. You make it so perfectly!
+  feedbacks:
+  - type: 0
+    text: WOW! This tastes amazing! Thank you! /p I feel like I am wide awake now.
+  - type: 1
+    text: 'I just cannot get enough of this drink. /p  '
+  - type: 2
+    text: /
+  - type: 3
+    text: Mmh, this is pretty good. /p Not as energizing as I thought it would be,
+      but still nice. Thank you!
+  - type: 4
+    text: /
+  - type: 5
+    text: Oh is there milk in this? I'm sorry I probably should have mentioned, /p
+      I am lactose intolerant. But it's okay! I will offer it to a friend instead.
+      Thank you!
+  - type: 6
+    text: Very interesting! I don't usually like [flavor] but it kind of works, I
+      can drink it! Thank you.
+  - type: 7
+    text: Mmh, very nice. I feel like some extra flavor would make it even better.
+      /p But that's for next time. Thank you for the drink!
+  goodbye: See you next time [player]!
+  story:
+  - I've been meaning to ask you, Do you know anything about that empty shop down
+    the street?/p I've always wanted to open an atelier for my art. It's like a dream
+    of mine.../p My parents don't like to hear about it though. They don't think
+    art is a job. /p Sigh. /p Oh gosh I'm sorry I didn't mean to rant. /p I will
+    leave you to your shift. Thank you for listening!
+  - I know, I know you're busy. But I have some exciting news! /p It turns out that
+    building is actually for sale! I called the seller and the price is very reasonable
+    too. /p It would be so nice... We would be neighbors! Haha /p Now I just need
+    to somehow tell my parents... /p ... /p I will keep you updated on it.
+  - 'So... /p I have good and bad news. /p The good news is... /p I was able to take
+    out a loan and the empty shop is officially mine!!! Can you believe it? /p Unfortunately
+    my parents did not take it very well. /p But you know, sometimes you have to
+    stand up for your dreams. /p I''m sure they will understand with time. /p Thank
+    you for listening, friend. '
+  - So, how is your shop coming along, neighbor? You've gotten quite a few regulars
+    by now I see. /p That makes me really happy to see. This place more than deserves
+    it! /p My atelier turned out amazing. I finally feel like I can be who I always
+    wanted to be. /p Thank you, for always having an open ear for me. I'm glad to
+    have such a good friend just around the corner.
