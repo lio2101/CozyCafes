@@ -102,28 +102,26 @@ public class CharacterManager : MonoBehaviour
         {
             Destroy(activeCharacterObj);
         }
-        // Door Sound
-        if (characters != null)
-        {
-            //initiate prefab
-            activeCharacterObj = Instantiate(characterPrefab);
-            activeCharacterObj.transform.SetParent(characterParent.transform, false);
+        Debug.Log("new character");
+        //initiate prefab
+        activeCharacterObj = Instantiate(characterPrefab);
+        activeCharacterObj.transform.SetParent(characterParent.transform, false);
 
-            activeCharacter = activeCharacterObj.GetComponent<Character>();
+        activeCharacter = activeCharacterObj.GetComponent<Character>();
 
-            int index = Random.Range(0, availableCharacters.Count);
+        int index = Random.Range(0, availableCharacters.Count);
 
-            activeCharacter.InitCharacter(availableCharacters[index]);
+        activeCharacter.InitCharacter(availableCharacters[index]);
 
-            visitedCharacters.Add(availableCharacters[index]);
-            returningCharacters.Add(availableCharacters[index]);
-            availableCharacters.RemoveAt(index);
+        visitedCharacters.Add(availableCharacters[index]);
+        returningCharacters.Add(availableCharacters[index]);
+        availableCharacters.RemoveAt(index);
 
 
-            activeCharacterObj.name = activeCharacter.Data.Name;
+        activeCharacterObj.name = activeCharacter.Data.Name;
 
-            characterCount++;
-        }
+        characterCount++;
+
         hasOrdered = false;
     }
 

@@ -863,6 +863,10 @@ PrefabInstance:
       value: Main Menu
       objectReference: {fileID: 0}
     - target: {fileID: 7529707026025378012, guid: bd438fc203f0a12418099247366da0dd, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7529707026025378012, guid: bd438fc203f0a12418099247366da0dd, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 3
       objectReference: {fileID: 0}
@@ -10907,6 +10911,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1717382403}
     m_Modifications:
+    - target: {fileID: 132280433455324495, guid: 34c6870c9686a0f41a848ddddb1bb888, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 367462282619917241, guid: 34c6870c9686a0f41a848ddddb1bb888, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 859878756590231296, guid: 34c6870c9686a0f41a848ddddb1bb888, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
@@ -10915,9 +10927,17 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: SetActive
       objectReference: {fileID: 0}
+    - target: {fileID: 1011880232364034213, guid: 34c6870c9686a0f41a848ddddb1bb888, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1490342397116814866, guid: 34c6870c9686a0f41a848ddddb1bb888, type: 3}
       propertyPath: m_Name
       value: Settings (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2509113601121128350, guid: 34c6870c9686a0f41a848ddddb1bb888, type: 3}
+      propertyPath: m_Interactable
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2595549427866544685, guid: 34c6870c9686a0f41a848ddddb1bb888, type: 3}
       propertyPath: m_Pivot.x
@@ -11564,6 +11584,18 @@ MonoBehaviour:
         m_TargetAssemblyTypeName: MenuManager, Assembly-CSharp
         m_MethodName: FinishIntro
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1451361240}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -14181,7 +14213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e54521e7d5c081e4fb9a5a8a5b0357b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skipIntro: 1
+  skipIntro: 0
   playerName: 
   backGroundMusic: {fileID: 8300000, guid: a93d15f67d5de2641aa522f51dd46cbd, type: 3}
   nightMusic: {fileID: 8300000, guid: 717732a40cc0066478c99f0dc1b3a4a7, type: 3}
@@ -14502,17 +14534,17 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: click anywhere to continue
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 9a14a8a1184c5f14fbce3338ea4d7a35, type: 2}
+  m_sharedMaterial: {fileID: 1260715531048141648, guid: 9a14a8a1184c5f14fbce3338ea4d7a35, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -14529,8 +14561,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 45
+  m_fontSizeBase: 45
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -16917,13 +16949,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1068474773}
     m_Modifications:
+    - target: {fileID: 132280433455324495, guid: 34c6870c9686a0f41a848ddddb1bb888, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 367462282619917241, guid: 34c6870c9686a0f41a848ddddb1bb888, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 859878756590231296, guid: 34c6870c9686a0f41a848ddddb1bb888, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 692676323}
+    - target: {fileID: 1011880232364034213, guid: 34c6870c9686a0f41a848ddddb1bb888, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1490342397116814866, guid: 34c6870c9686a0f41a848ddddb1bb888, type: 3}
       propertyPath: m_Name
       value: Settings (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2509113601121128350, guid: 34c6870c9686a0f41a848ddddb1bb888, type: 3}
+      propertyPath: m_Interactable
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2595549427866544685, guid: 34c6870c9686a0f41a848ddddb1bb888, type: 3}
       propertyPath: m_Pivot.x
