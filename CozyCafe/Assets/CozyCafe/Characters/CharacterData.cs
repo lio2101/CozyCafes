@@ -51,8 +51,10 @@ public struct Expression
 [Serializable]
 public struct Greeting
 {
-    [SerializeField] private GreetingType type; [SerializeField] private string text;
-    [SerializeField] public GreetingType Type => type;
+    [SerializeField] private GreetingType type;
+    [SerializeField] private string text;
+
+    public GreetingType Type => type;
     public string Text => text;
 }
 [Serializable]

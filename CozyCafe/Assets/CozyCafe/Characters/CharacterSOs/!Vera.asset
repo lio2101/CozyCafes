@@ -19,8 +19,8 @@ MonoBehaviour:
     amount: 0
     flavor: 3
   storyprogress: 0
-  visitAmount: 0
-  correctAmount: 0
+  visitAmount: 1
+  correctAmount: 1
   expressions:
   - type: 0
     sprite: {fileID: 2451018631221633367, guid: 171f00e983315df40ab9408d87bbe67a, type: 3}

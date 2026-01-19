@@ -20,7 +20,7 @@ public class SceneManager : MonoBehaviour
 
     private void Awake()
     {
-        screenWidth = Camera.main.orthographicSize * 2f * Camera.main.aspect;
+        screenWidth = Screen.width;
         isFront = true;
         frontScene.SetActive(true);
 
@@ -73,21 +73,24 @@ public class SceneManager : MonoBehaviour
         frontScene.SetActive(true);
         backScene.SetActive(true);
 
-        Vector3 startPos = Vector3.zero;
-        frontScene.transform.position = startPos;
-        backScene.transform.position = startPos;
+        RectTransform frontRT = frontScene.GetComponent<RectTransform>();
+        RectTransform backRT = backScene.GetComponent<RectTransform>();
 
+        float screenWidth = ((RectTransform)frontRT.parent).rect.width;
 
-        Vector3 distance = startPos + Vector3.right * screenWidth;
+        Vector2 startPos = Vector2.zero;
+        Vector2 distance = Vector2.right * screenWidth;
 
-        // direction = +1 (right) or -1 (left)
         int dir = (index == 1) ? 1 : -1;
 
-        Vector3 startPosA = startPos;
-        Vector3 targetPosA = startPosA + distance * dir;
+        Vector2 startPosA = startPos;
+        Vector2 targetPosA = startPos + distance * dir;
 
-        Vector3 startPosB = backScene.transform.position - distance * dir;
-        Vector3 targetPosB = startPos;
+        Vector2 startPosB = startPos - distance * dir;
+        Vector2 targetPosB = startPos;
+
+        frontRT.anchoredPosition = startPosA;
+        backRT.anchoredPosition = startPosB;
 
         float elapsed = 0f;
 
@@ -98,16 +101,18 @@ public class SceneManager : MonoBehaviour
 
             if (index == 0)
             {
-                frontScene.transform.position = Vector3.Lerp(startPosA, targetPosA, t);
-                backScene.transform.position = Vector3.Lerp(startPosB, targetPosB, t);
+                frontRT.anchoredPosition = Vector2.Lerp(startPosA, targetPosA, t);
+                backRT.anchoredPosition = Vector2.Lerp(startPosB, targetPosB, t);
             }
             else
             {
-                backScene.transform.position = Vector3.Lerp(startPosA, targetPosA, t);
-                frontScene.transform.position = Vector3.Lerp(startPosB, targetPosB, t);
+                backRT.anchoredPosition = Vector2.Lerp(startPosA, targetPosA, t);
+                frontRT.anchoredPosition = Vector2.Lerp(startPosB, targetPosB, t);
             }
+
             yield return null;
         }
+
         isFront = !isFront;
     }
 
